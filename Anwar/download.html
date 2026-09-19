@@ -108,7 +108,7 @@ footer .sep{opacity:.4;margin:0 8px}
     <h1>تطبيق الأنوار</h1>
     <p class="tag">مصحفٌ كامل بلا إنترنت — <b>وبلا إعلانات أبداً</b></p>
 
-    <a class="cta" id="cta1" href="https://apps.apple.com/app/id6782741099">
+    <a class="cta" id="cta1" href="https://apps.apple.com/app/apple-store/id6782741099?pt=129063745&mt=8">
       <svg viewBox="0 0 24 24"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.6 2.3 2.8 2.3 1.1 0 1.6-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.2 1.2-2.5 1.2-2.5s-2.3-.9-2.3-3.5zM14.2 5.9c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.7-.9 2.8 1 .1 2-.5 2.6-1.3z"/></svg>
       حمّله على App Store
     </a>
@@ -157,7 +157,7 @@ footer .sep{opacity:.4;margin:0 8px}
   <div class="end">
     <h3>ابدأ اليوم</h3>
     <p>تحميل واحد، ويبقى معك بلا إنترنت</p>
-    <a class="cta" id="cta2" href="https://apps.apple.com/app/id6782741099" style="margin-top:22px">
+    <a class="cta" id="cta2" href="https://apps.apple.com/app/apple-store/id6782741099?pt=129063745&mt=8" style="margin-top:22px">
       <svg viewBox="0 0 24 24"><path d="M16.4 12.9c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.6 2.3 2.8 2.3 1.1 0 1.6-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.2 1.2-2.5 1.2-2.5s-2.3-.9-2.3-3.5zM14.2 5.9c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.7-.9 2.8 1 .1 2-.5 2.6-1.3z"/></svg>
       حمّله على App Store
     </a>
@@ -172,9 +172,10 @@ footer .sep{opacity:.4;margin:0 8px}
 <script>
 // يمرّر رمز الحملة من رابط الصفحة إلى رابط المتجر، فتُعرف مصادر التحميل في App Store Connect
 (function(){
+  // آبل تتجاهل ct ما لم يرافقه pt (رمز المزوّد) — فلا بد من الاثنين معاً
   var ct = new URLSearchParams(location.search).get('ct');
-  var base = 'https://apps.apple.com/app/id6782741099';
-  var url = base + '?mt=8' + (ct ? '&ct=' + encodeURIComponent(ct.slice(0,60)) : '');
+  var base = 'https://apps.apple.com/app/apple-store/id6782741099?pt=129063745';
+  var url = base + (ct ? '&ct=' + encodeURIComponent(ct.slice(0,60)) : '') + '&mt=8';
   ['cta1','cta2'].forEach(function(id){
     var a = document.getElementById(id); if(a) a.href = url;
   });
