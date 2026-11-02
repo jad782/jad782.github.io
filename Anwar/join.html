@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دعوة إلى ختمة جماعية — تطبيق الأنوار</title>
-<meta property="og:title" content="دعوة إلى ختمة جماعية">
-<meta property="og:description" content="اختر جزءك واقرأ معنا — نختم القرآن معاً عبر تطبيق الأنوار.">
+<title>دعوة — تطبيق الأنوار</title>
 <!--
-  صفحةُ رابط الدعوة (deeplink.js → inviteUrl).
+  وسومُ المعاينةِ عامّةٌ لا تخصُّ دعوةً بعينِها: واتساب يقرأُ HTML الصفحةِ بلا جافاسكربت، فلا يرى
+  ‏?room=‏ من ‏?fajr=‏ — وكانت دعوةُ «صحبة الفجر» تظهرُ تحتَها بطاقةُ «دعوة إلى ختمة جماعية».
+  والعنوانُ الظاهرُ في الصفحةِ نفسِها يتبعُ نوعَ الدعوة (السكربت أسفل).
+-->
+<meta property="og:title" content="دعوة من تطبيق الأنوار">
+<meta property="og:description" content="ختمة جماعية نقرؤها معاً، أو صحبة فجر يوقظ فيها بعضنا بعضاً بأصواتنا.">
+<!--
+  صفحةُ رابط الدعوة (deeplink.js → inviteUrl، وfajr-circle.js → AnwarFajr.invite).
+  نوعان: ‏?room=CODE‏ ختمةٌ جماعيّة، و‏?fajr=CODE‏ «صحبة الفجر» (alanwar://fajr?c=CODE).
 
   الرابطُ المخصَّص ‏alanwar://‏ وحده يصل نصّاً ميّتاً لمن لا يملك التطبيق،
   وواتساب لا يجعله قابلاً للنقر. فالدعوة تحمل رابط هذه الصفحة: تفتح الختمة
@@ -53,7 +59,7 @@
       <a class="cta alt" href="https://apps.apple.com/app/id6782741099">ليس لديّ التطبيق — حمّله من App Store</a>
 
       <div class="code">
-        <small>أو افتح التطبيق ← «ختمة جماعية» ← «انضمّ»، والصق هذا الرمز:</small>
+        <small id="code-how">أو افتح التطبيق ← «ختمة جماعية» ← «انضمّ»، والصق هذا الرمز:</small>
         <button id="code-btn" type="button" title="اضغط للنسخ"></button>
         <div class="note" id="note"></div>
       </div>
@@ -70,15 +76,29 @@
   </div>
 <script>
 (function(){
-  var m = (location.search || '').match(/[?&]room=([A-Za-z0-9_-]{4,64})(?:&|$)/);
-  var room = m ? m[1] : '';
+  // «صحبة الفجر» أوّلاً: رمزُها عشرون حرفاً لاتينيّاً أو رقماً بالضبط كما يصنعُه fajr-circle.js،
+  // ويُقرأُ قبلَ ‏room=‏ كما في deeplink.js فلا يختلفُ الجانبانِ في نوعِ رابطٍ واحد
+  var f = (location.search || '').match(/[?&]fajr=([A-Za-z0-9]{20})(?:&|#|$)/);
+  var m = f ? null : (location.search || '').match(/[?&]room=([A-Za-z0-9_-]{4,64})(?:&|$)/);
+  var room = f ? f[1] : (m ? m[1] : '');
   if(!room){
     document.getElementById('has-room').hidden = true;
     document.getElementById('no-room').hidden = false;
     document.getElementById('sub').textContent = 'رابطُ الدعوة ناقص. اطلب من صاحب الختمة أن يرسله من جديد، أو حمّل التطبيق وابدأ ختمتك.';
     return;
   }
-  document.getElementById('open-app').href = 'alanwar://khatma?room=' + encodeURIComponent(room);
+  if(f){
+    // المدعوُّ بلا التطبيقِ يحمّلُه ثمّ يعود: لا رابطَ مؤجَّلاً يحملُ الرمزَ عبرَ المتجر، فالعودةُ إلى هذه
+    // الصفحةِ والضغطُ ثانيةً هي الطريق — أو لصقُ الرمزِ في «انضم برمز»
+    document.title = 'دعوة إلى صحبة الفجر — تطبيق الأنوار';
+    document.getElementById('title').textContent = 'دعوة إلى صحبة الفجر';
+    document.getElementById('sub').textContent = 'يوقظ بعضنا بعضاً لصلاة الفجر، كلٌّ بصوته. افتح الدعوة في تطبيق الأنوار، واكتب اسمك، وسجّل رسالة قصيرة لأصحابك.';
+    document.getElementById('open-app').textContent = 'افتح الدعوة في التطبيق';
+    document.getElementById('open-app').href = 'alanwar://fajr?c=' + encodeURIComponent(room);
+    document.getElementById('code-how').textContent = 'حمّلت التطبيق الآن؟ عد إلى هذه الصفحة واضغط الزر الأول، أو افتح «صحبة الفجر» ← «انضم برمز» والصق هذا الرمز:';
+  } else {
+    document.getElementById('open-app').href = 'alanwar://khatma?room=' + encodeURIComponent(room);
+  }
   var btn = document.getElementById('code-btn'), note = document.getElementById('note');
   btn.textContent = room;
   btn.addEventListener('click', function(){
