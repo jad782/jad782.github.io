@@ -41,7 +41,7 @@
       <li>ختماتك الفردية ومهامك ومفضّلتك ونقاطك وتسجيلات تلاوتك تُحفظ على جهازك ولا تُرفع.</li>
       <li>الموقع لحساب أوقات الصلاة والقبلة على جهازك، ولا يُرسل إلى أي خادم.</li>
       <li>المايكروفون والكاميرا والإشعارات بإذنك فقط. يحوّل نظام جهازك تلاوتك في التسميع والبحث الصوتي إلى نصّ، وقد يمرّ ذلك بخوادم Apple أو Google، ولا يصلنا منها شيء ولا تُحفظ.</li>
-      <li>نص القرآن والتفسير الميسّر داخل التطبيق ويعملان بلا إنترنت (مجمع الملك فهد). والتفاسير الأخرى والتلاوات وخطوط التجويد تُجلب عند طلبها من api.quran.com وmp3quran.net وQuran Foundation، ولا يُرسل معها بيان عنك.</li>
+      <li>نص القرآن والتفسير الميسّر داخل التطبيق ويعملان بلا إنترنت (مجمع الملك فهد). والتفاسير الأخرى والتلاوات وخطوط التجويد تُجلب عند طلبها من خوادم خارجية، منها api.quran.com وmp3quran.net وQuran Foundation، ولا يُرسل معها بيان عنك.</li>
     </ul>
   </div>
 
@@ -51,8 +51,9 @@
       <li>صحبة الفجر: الاسم الذي تكتبه ورسالتك الصوتية ووقت استيقاظك تُرفع إلى Google Firebase ويراها أعضاء صحبتك، ويُحذف صوتك حين تغادرها.</li>
       <li>الختمة الجماعية: الاسم الذي تكتبه وما أتممته والإهداء تُرفع إلى Google Firebase ويراها من يملك رمز الختمة.</li>
       <li>النبض الحيّ: يُرسل وقت حضورك مع معرّف مجهول، بلا اسم ولا موقع، لعدّ من يذكر الله معك.</li>
-      <li>إحصاءات وأعطال: معرّف الجهاز ونوعه ولغته وتاريخ التثبيت، ونوع الاشتراك عند الشراء، ونصّ الخطأ مع رقم النسخة، تُرفع إلى Google Firebase. أمّا بيانات الدفع فعند المتجر ولا تصلنا.</li>
-      <li>على iOS: ترسل حزمة Meta أحداث الاستخدام (كالتثبيت والفتح والشراء) لقياس إعلاناتنا، بلا معرّف الإعلان، ولا نطلب إذن التتبّع.</li>
+      <li>إحصاءات وأعطال: معرّف الجهاز ونوعه ولغته وتاريخ التثبيت، وعدّادات استخدام مجمّعة بلا معرّف، ونصّ الخطأ مع رقم النسخة، تُرفع إلى Google Firebase. أمّا بيانات الدفع فعند المتجر ولا تصلنا.</li>
+      <li>«أبلِغنا»: ما تكتبه مع موضع التسميع وأخطائه ورقم النسخة، وقد يُرفق به معرّف جهازك، يُرفع إلى Google Firebase حين ترسله، بلا تسجيل صوت.</li>
+      <li>نسخ iOS الأقدم من 2.0.6 قد ترسل عبر حزمة Meta أحداث الاستخدام (كالتثبيت والفتح والشراء) مع معرّف خاص بالتثبيت ومعلومات الجهاز، لقياس إعلاناتنا، بلا معرّف الإعلان. وتوقّف ذلك من نسخة 2.0.6.</li>
     </ul>
   </div>
 
@@ -82,7 +83,7 @@
       <li>Your personal khatmas, tasks, favourites, points and recitation recordings are stored on your device and are not uploaded.</li>
       <li>Location is used on your device to compute prayer times and the qibla, and is never sent to any server.</li>
       <li>Microphone, camera and notifications are used only with your permission. Your device’s system turns your recitation in memorization review and voice search into text, which may pass through Apple or Google servers. None of it reaches us and it is not saved.</li>
-      <li>The Quran text and the al-Muyassar tafsir are built into the app and work offline (King Fahd Complex). Other tafsirs, recitations and tajweed fonts are fetched when you ask for them from api.quran.com, mp3quran.net and Quran Foundation, and no data about you is sent with them.</li>
+      <li>The Quran text and the al-Muyassar tafsir are built into the app and work offline (King Fahd Complex). Other tafsirs, recitations and tajweed fonts are fetched when you ask for them from outside servers, including api.quran.com, mp3quran.net and Quran Foundation, and no data about you is sent with them.</li>
     </ul>
   </div>
 
@@ -92,8 +93,9 @@
       <li>Fajr Circle: the name you enter, your voice message and your wake-up time are uploaded to Google Firebase and seen by your circle’s members. Your voice is deleted when you leave the circle.</li>
       <li>Group Khatma: the name you enter, what you have completed and any dedication are uploaded to Google Firebase and seen by anyone with the khatma code.</li>
       <li>Live Pulse: the time you are present is sent with an anonymous ID, with no name or location, to count who is remembering Allah with you.</li>
-      <li>Statistics and errors: device ID, type and language, install date, subscription type when you buy, and error text with the app version are uploaded to Google Firebase. Payment details stay with the store and never reach us.</li>
-      <li>On iOS: the Meta SDK sends usage events (such as install, open and purchase) to measure our ads, without the advertising ID, and we do not ask for tracking permission.</li>
+      <li>Statistics and errors: device ID, type and language, install date, aggregate usage counters with no ID, and error text with the app version are uploaded to Google Firebase. Payment details stay with the store and never reach us.</li>
+      <li>“Tell us”: what you write, with the passage, its mistakes and the app version, and sometimes your device ID, is uploaded to Google Firebase when you send it, with no voice recording.</li>
+      <li>iOS versions older than 2.0.6 may send usage events (such as install, open and purchase) through the Meta SDK, with an install ID and device information, to measure our ads, without the advertising ID. This stopped in version 2.0.6.</li>
     </ul>
   </div>
 
