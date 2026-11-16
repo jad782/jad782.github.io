@@ -29,7 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script>
 /* يطبّق الوضع (فاتح/ليلي) قبل الرسم لتفادي الوميض */
-(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('halid-theme');if(t==='dark'||t==='light'){d.setAttribute('data-theme',t);document.querySelectorAll('meta[name=theme-color]').forEach(function(m){m.content=t==='dark'?'#120A16':'#F6F3EF'})}if(localStorage.getItem('halid-still')==='1')d.classList.add('still')}catch(e){}})();
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('halid-theme');if(t==='dark'||t==='light'){d.setAttribute('data-theme',t);document.querySelectorAll('meta[name=theme-color]').forEach(function(m){m.content=t==='dark'?'#120A16':'#F6F3EF'})}if(localStorage.getItem('halid-still')==='1')d.classList.add('still')}catch(e){}try{if(!location.hash&&document.cookie.indexOf('halid-intro=1')<0&&!d.classList.contains('still')&&!sessionStorage.getItem('halid-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('intro')}catch(e){}})();
 </script>
 <style>
 /* =========================================================
@@ -109,6 +109,7 @@ input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--teal-ink);outline-offset:3px;border-radius:10px}
 .cta :focus-visible,.mnav :focus-visible,.menu-open .hdr :focus-visible,.band :focus-visible{outline-color:#6FDCCB}
 .container{width:min(100% - 2*var(--gutter),var(--container));margin-inline:auto}
+[hidden]{display:none!important}
 .en{direction:ltr;unicode-bidi:isolate}
 .serif{font-family:var(--font-serif);font-style:italic;font-weight:400}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -196,7 +197,7 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .menu-open .mnav ol a{transform:none;transition-delay:calc(.25s + var(--i)*.06s)}
 .mnav-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;opacity:0;transition:opacity .5s .5s}
 .menu-open .mnav-foot{opacity:1}
-.mnav-foot a:not(.btn){font-size:15px;color:rgba(246,243,239,.8);display:inline-flex;gap:8px;align-items:center;min-height:44px}
+.mnav-foot a:not(.btn):not(.soc){font-size:15px;color:rgba(246,243,239,.8);display:inline-flex;gap:8px;align-items:center;min-height:44px}
 
 /* =========================================================
    Hero
@@ -347,6 +348,35 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .svc.feat .svc-tags li{background:rgba(246,243,239,.1);color:#F6F3EF}
 .svc-wm{position:absolute;z-index:-1;width:62%;left:-12%;bottom:-14%;--mb:rgba(255,255,255,.055);--md:rgba(255,255,255,.055);transform:rotate(-8deg);transition:transform 1.2s var(--ease)}
 .svc.feat:hover .svc-wm{transform:rotate(0) scale(1.05)}
+
+/* Design types — «التصميم بكل أنواعه» */
+.dt{margin-top:clamp(56px,7vw,96px)}
+.dt-head,.xs-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px 40px;flex-wrap:wrap;margin-bottom:clamp(22px,2.6vw,32px)}
+.h3{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,2.5vw,34px);line-height:1.35;text-wrap:balance}
+.h3 .hl{color:var(--accent)}
+.dt-head p,.xs-head p{color:var(--muted);font-size:16px;line-height:1.9;max-width:31em;text-wrap:pretty}
+.dt-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)}
+.dt-i{display:flex;flex-direction:column;gap:16px;padding:18px 18px 16px;border-radius:22px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .6s var(--spring),box-shadow .6s var(--ease),border-color .4s}
+.dt-i:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:var(--line-2)}
+.dt-ic{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--ico-bg);color:var(--accent);transition:transform .6s var(--spring)}
+.dt-i:hover .dt-ic{transform:rotate(-8deg) scale(1.06)}
+.dt-ic svg{width:25px;height:25px;overflow:visible}
+.dt-ic .s{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.dt-ic .t{fill:var(--teal);stroke:none}
+.dt-t{margin-top:auto}
+.dt-t b{display:block;font-family:var(--font-display);font-weight:600;font-size:16px;line-height:1.45;text-wrap:balance}
+.dt-t small{display:block;margin-top:3px;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* Side services — «خدمات جانبية» */
+.xs{margin-top:clamp(40px,5vw,64px);padding:clamp(22px,3vw,40px);border-radius:var(--radius-lg);background:var(--bg-2);border:1px solid var(--line)}
+.xs-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)}
+.xs-i{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:20px;background:var(--surface);border:1px solid var(--line)}
+.xs-lg{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;margin-bottom:4px;font:700 18px/1 var(--font-body);direction:ltr;background:var(--ico-bg);background:color-mix(in srgb,var(--tl) 11%,var(--surface));color:var(--tl);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--tl) 22%,transparent)}
+:root[data-theme="dark"] .xs-lg{background:var(--tb);color:var(--tc);box-shadow:inset 0 0 0 2px var(--tc)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .xs-lg{background:var(--tb);color:var(--tc);box-shadow:inset 0 0 0 2px var(--tc)}}
+.xs-lg svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.xs-i h4{font-family:var(--font-display);font-weight:600;font-size:17px;line-height:1.45}
+.xs-i p{font-size:14.5px;color:var(--muted);line-height:1.85;text-wrap:pretty}
 
 /* Works */
 .works{background:linear-gradient(180deg,transparent,var(--bg-2) 18%,var(--bg-2) 82%,transparent)}
@@ -541,9 +571,13 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .cta-p{margin-top:22px;color:rgba(246,243,239,.78);font-size:clamp(16px,1.2vw,18px);line-height:1.95;max-width:30em}
 .cta-direct{margin-top:34px;padding-top:26px;border-top:1px solid rgba(246,243,239,.14)}
 .cta-direct small{display:block;font-size:13px;color:rgba(246,243,239,.6);margin-bottom:12px}
-.handle{display:inline-flex;align-items:center;gap:14px;font-size:clamp(18px,1.6vw,22px);font-weight:600;direction:ltr;transition:color .3s}
-.handle .hi{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#F9CE34,#EE2A7B 50%,#6228D7);color:#fff;transition:transform .6s var(--spring)}
+.handle{display:inline-flex;align-items:center;gap:14px;font-size:clamp(18px,1.6vw,22px);font-weight:600;direction:rtl;transition:color .3s}
+.handle .hi{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#F9CE34,#EE2A7B 50%,#6228D7);color:#fff;transition:transform .6s var(--spring)}
 .handle .hi .ic{width:24px;height:24px}
+.handles{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.handle{max-width:100%}
+.handle>span:last-child{min-width:0;overflow-wrap:break-word;unicode-bidi:isolate}
+.handle .hi.wa{background:#25D366}.handle .hi.fb{background:#1877F2}.handle .hi.be{background:#1769FF}.handle .hi.ml{background:#34B5A3;color:#0D2724}
 .handle:hover{color:#6FDCCB}.handle:hover .hi{transform:rotate(-8deg) scale(1.06)}
 .cta-wm{position:absolute;z-index:-1;width:min(40vw,460px);right:-6%;bottom:-24%;--mb:rgba(255,255,255,.04);--md:rgba(255,255,255,.04);transform:rotate(12deg)}
 .brief{position:relative;border-radius:30px;padding:clamp(20px,2.6vw,34px);background:rgba(255,255,255,.06);border:1px solid rgba(246,243,239,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
@@ -569,6 +603,7 @@ textarea.inp{min-height:104px}
 .bubble{position:relative;padding:14px 18px;border-radius:20px 20px 6px 20px;background:linear-gradient(135deg,#F6F3EF,#E8E0EE);color:#2A1533;font-size:15px;line-height:1.85;white-space:pre-wrap;word-break:break-word;min-height:60px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
 .bubble.bump{animation:bump .4s var(--ease)}
 .brief-act{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px}
+.brief-act .btn{flex:1 1 auto}
 .brief-note{font-size:12.5px;color:rgba(246,243,239,.7);margin-top:12px;line-height:1.7}
 
 /* Footer */
@@ -583,6 +618,20 @@ textarea.inp{min-height:104px}
 .ftr-links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding-inline:6px;margin-inline:-6px;transition:color .3s}.ftr-links a:hover{color:var(--teal-ink)}
 .ftr-row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .ftr-row .en{letter-spacing:.18em;font-size:11.5px;font-weight:600}
+.ftr-nav{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+@media (min-width:721px){.ftr-nav{align-items:flex-end}}
+.socials{display:flex;flex-wrap:wrap;gap:10px}
+.soc{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--ink);transition:background-color .3s,border-color .3s,color .3s,transform .5s var(--spring)}
+.soc .ic{width:20px;height:20px}
+.soc.ig{--bc:#E1306C}.soc.wa{--bc:#25D366}.soc.fb{--bc:#1877F2}.soc.be{--bc:#1769FF}.soc.ml{--bc:#34B5A3}
+@media (hover:hover){.soc:hover{background:var(--bc);border-color:var(--bc);color:#fff;transform:translateY(-3px)}}
+.mnav-foot .soc{border-color:rgba(246,243,239,.24);color:#F6F3EF}
+.wa-fab{position:fixed;left:max(18px,env(safe-area-inset-left));bottom:max(18px,env(safe-area-inset-bottom));z-index:70;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#25D366;color:#fff;box-shadow:0 14px 34px -8px rgba(37,211,102,.55),0 4px 12px rgba(0,0,0,.15);transform:translateY(24px) scale(.8);opacity:0;visibility:hidden;transition:transform .6s var(--spring),opacity .35s,visibility 0s .6s}
+.wa-fab .ic{width:29px;height:29px}
+.wa-fab.show{transform:none;opacity:1;visibility:visible;transition:transform .6s var(--spring),opacity .35s,visibility 0s}
+@media (hover:hover){.wa-fab.show:hover{transform:scale(1.07)}}
+.menu-open .wa-fab{opacity:0;visibility:hidden}
+.wa-fab:focus-visible{outline:2px solid var(--teal-ink);outline-offset:4px}
 .totop{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--ink)}
 .totop .icon-btn{transition:transform .5s var(--spring),background-color .3s}
 .totop:hover .icon-btn{transform:translateY(-4px);background:var(--surface)}
@@ -621,6 +670,19 @@ textarea.inp{min-height:104px}
 .lb-nav{top:50%;margin-top:-24px}
 .lb-prev{right:16px}.lb-next{left:16px}
 
+/* Intro — types «أهلاً، أنا خالد» once per browser session */
+.intro-ov{display:none}
+.intro .intro-ov{position:fixed;inset:0;z-index:200;display:grid;place-items:center;color:#F6F3EF;background:radial-gradient(60% 70% at 88% 8%,rgba(52,181,163,.3),transparent 60%),radial-gradient(55% 65% at 8% 96%,rgba(176,122,203,.36),transparent 62%),linear-gradient(150deg,#4C205E,#2A1134 70%,#200C28);clip-path:inset(0 0 0 0);animation:introFail .5s 7s forwards}
+.intro .intro-ov.out{clip-path:inset(0 0 100% 0);transition:clip-path .75s var(--ease-io);pointer-events:none}
+.intro-in{display:flex;flex-direction:column;align-items:center;gap:clamp(16px,2.4vw,26px);padding:24px;text-align:center}
+.intro-mk{width:clamp(60px,8vw,88px);height:auto;--mb:#F6F3EF;--md:#34B5A3;opacity:0;transform:scale(.6) rotate(-14deg);animation:introMk .9s var(--spring) .1s forwards}
+.intro-t{display:flex;align-items:baseline;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:clamp(40px,7.4vw,96px);line-height:1.3;min-height:1.3em;white-space:nowrap}
+.intro-t .tdot{width:0;margin-inline-start:0;transform:scale(0);transition:width .3s var(--ease),margin .3s var(--ease),transform .55s var(--spring)}
+.intro-caret{display:inline-block;width:max(3px,.05em);height:.95em;margin-inline-start:.06em;border-radius:2px;background:#6FDCCB;animation:caret 1s steps(1) infinite}
+.intro-sub{font-size:12px;font-weight:600;letter-spacing:.36em;color:rgba(246,243,239,.62);opacity:0;transform:translateY(8px);transition:opacity .6s,transform .6s var(--ease)}
+.intro-ov.done .intro-t .tdot{width:.19em;margin-inline-start:.07em;transform:none}
+.intro-ov.done .intro-caret{animation:none;opacity:0;transition:opacity .25s}
+.intro-ov.done .intro-sub{opacity:1;transform:none}
 .hero.paused *,.hero.paused *::before,.hero.paused *::after{animation-play-state:paused!important}
 .still *,.still *::before,.still *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important}
 .still .hero.is-in .fc-cur .cur-move{animation:none!important}
@@ -652,6 +714,9 @@ textarea.inp{min-height:104px}
 @keyframes drawIn{to{stroke-dashoffset:0}}
 @keyframes sheen{to{background-position:-200% 0}}
 @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.015)}100%{transform:scale(1)}}
+@keyframes introMk{to{opacity:1;transform:none}}
+@keyframes caret{50%{opacity:0}}
+@keyframes introFail{to{opacity:0;visibility:hidden}}
 @keyframes lbIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
 
 /* =========================================================
@@ -725,7 +790,26 @@ textarea.inp{min-height:104px}
   .ftr-top p{font-size:22px}
   .band{margin-inline:8px}
 }
-@media (hover:none){.svc:hover,.tool:hover{transform:none}}
+@media (max-width:1080px){.dt-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.xs-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.dt-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){
+  .dt-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .dt-i{flex-direction:column;align-items:flex-start;gap:10px;padding:14px 14px 13px;border-radius:16px}
+  .dt-ic{width:38px;height:38px;border-radius:12px;flex:none}
+  .dt-ic svg{width:21px;height:21px}
+  .dt-t b{font-size:14.5px;line-height:1.4}
+  .dt-t small{display:none}
+  .xs{padding:20px 14px;border-radius:26px}
+  .xs-list{grid-template-columns:1fr;gap:10px}
+  .xs-i{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:4px;padding:14px}
+  .xs-lg{grid-row:1/3;margin:0;width:44px;height:44px;border-radius:13px}
+  .handle{font-size:16px;gap:12px}
+  .handle .hi{width:46px;height:46px;border-radius:14px}
+  .mnav-foot.many .btn{flex:1 1 100%}
+  .xs-i h4,.xs-i p{grid-column:2}
+  .wa-fab{width:54px;height:54px}
+}
+@media (hover:none){.svc:hover,.tool:hover,.dt-i:hover{transform:none}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important;transition-delay:0s!important}
@@ -735,6 +819,14 @@ textarea.inp{min-height:104px}
 </head>
 <body>
 <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+
+<div class="intro-ov" id="intro" aria-hidden="true">
+  <div class="intro-in">
+    <svg class="intro-mk" viewBox="0 0 888.9 970.7"><use href="#s-mark"/></svg>
+    <p class="intro-t"><span id="introTxt"></span><i class="tdot"></i><i class="intro-caret"></i></p>
+    <small class="intro-sub" lang="en">HALID DESIGNER</small>
+  </div>
+</div>
 
 <!-- ================= SVG sprite: logo + icons ================= -->
 <svg class="sprite" aria-hidden="true" focusable="false">
@@ -749,6 +841,10 @@ textarea.inp{min-height:104px}
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
   <symbol id="i-next" viewBox="0 0 24 24"><path d="M14.5 6 8.5 12l6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-prev" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+  <symbol id="i-be" viewBox="0 0 24 24"><path fill="currentColor" d="M16.969 16.927a2.561 2.561 0 0 0 1.901.677 2.501 2.501 0 0 0 1.531-.475c.362-.235.636-.584.779-.99h2.585a5.091 5.091 0 0 1-1.9 2.896 5.292 5.292 0 0 1-3.091.88 5.839 5.839 0 0 1-2.284-.433 4.871 4.871 0 0 1-1.723-1.211 5.657 5.657 0 0 1-1.08-1.874 7.057 7.057 0 0 1-.383-2.393c-.005-.8.129-1.595.396-2.349a5.313 5.313 0 0 1 5.088-3.604 4.87 4.87 0 0 1 2.376.563c.661.362 1.231.87 1.668 1.485a6.2 6.2 0 0 1 .943 2.133c.194.821.263 1.666.205 2.508h-7.699c-.063.79.184 1.574.688 2.187ZM6.947 4.084a8.065 8.065 0 0 1 1.928.198 4.29 4.29 0 0 1 1.49.638c.418.303.748.711.958 1.182.241.579.357 1.203.341 1.83a3.506 3.506 0 0 1-.506 1.961 3.726 3.726 0 0 1-1.503 1.287 3.588 3.588 0 0 1 2.027 1.437c.464.747.697 1.615.67 2.494a4.593 4.593 0 0 1-.423 2.032 3.945 3.945 0 0 1-1.163 1.413 5.114 5.114 0 0 1-1.683.807 7.135 7.135 0 0 1-1.928.259H0V4.084h6.947Zm-.235 12.9c.308.004.616-.029.916-.099a2.18 2.18 0 0 0 .766-.332c.228-.158.411-.371.534-.619.142-.317.208-.663.191-1.009a2.08 2.08 0 0 0-.642-1.715 2.618 2.618 0 0 0-1.696-.505h-3.54v4.279h3.471Zm13.635-5.967a2.13 2.13 0 0 0-1.654-.619 2.336 2.336 0 0 0-1.163.259 2.474 2.474 0 0 0-.738.62 2.359 2.359 0 0 0-.396.792c-.074.239-.12.485-.137.734h4.769a3.239 3.239 0 0 0-.679-1.785l-.002-.001Zm-13.813-.648a2.254 2.254 0 0 0 1.423-.433c.399-.355.607-.88.56-1.413a1.916 1.916 0 0 0-.178-.891 1.298 1.298 0 0 0-.495-.533 1.851 1.851 0 0 0-.711-.274 3.966 3.966 0 0 0-.835-.073H3.241v3.631h3.293v-.014ZM21.62 5.122h-5.976v1.527h5.976V5.122Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.8 7.2 8.2 6 8.2-6"/></g></symbol>
   <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 3.5 10.6l6.6 2.8 2.8 6.6 7.6-16.5ZM10.1 13.4l4.6-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -788,7 +884,7 @@ textarea.inp{min-height:104px}
     <li><a href="#contact" style="--i:4">تواصل</a></li>
   </ol>
   <div class="mnav-foot">
-    <a href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span class="en" lang="en">@haliddesigner.tr</span></a>
+    <div class="socials"><a class="soc ig" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span class="sr-only">إنستغرام</span></a><a class="soc wa" data-ch="whatsapp" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span class="sr-only">واتساب</span></a><a class="soc fb" data-ch="facebook" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span class="sr-only">فيسبوك</span></a><a class="soc be" data-ch="behance" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-be"/></svg><span class="sr-only">بيهانس</span></a><a class="soc ml" data-ch="email" hidden href="#"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span class="sr-only">إيميل</span></a></div>
     <a class="btn btn-teal" href="#contact"><span>ابدأ مشروعك</span><span class="btn-ic"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
   </div>
 </nav>
@@ -807,9 +903,9 @@ textarea.inp{min-height:104px}
         <a class="btn btn-ghost" href="#contact" data-magnetic>خلّينا نشتغل سوا</a>
       </div>
       <ul class="hero-meta" data-in style="--d:850">
-        <li><span class="n">01</span><b>تصميم غرافيكي</b><small class="en" lang="en" lang="en" aria-hidden="true">GRAPHIC DESIGN</small></li>
-        <li><span class="n">02</span><b>هوية بصرية</b><small class="en" lang="en" lang="en" aria-hidden="true">VISUAL IDENTITY</small></li>
-        <li><span class="n">03</span><b>مونتاج فيديو</b><small class="en" lang="en" lang="en" aria-hidden="true">VIDEO EDITING</small></li>
+        <li><span class="n">01</span><b>تصميم غرافيكي</b><small class="en" lang="en" aria-hidden="true">GRAPHIC DESIGN</small></li>
+        <li><span class="n">02</span><b>هوية بصرية</b><small class="en" lang="en" aria-hidden="true">VISUAL IDENTITY</small></li>
+        <li><span class="n">03</span><b>مونتاج فيديو</b><small class="en" lang="en" aria-hidden="true">VIDEO EDITING</small></li>
       </ul>
     </div>
 
@@ -885,7 +981,8 @@ textarea.inp{min-height:104px}
     </div>
     <div class="svc-grid">
       <div class="svc-w" data-reveal style="--d:0">
-        <article class="svc">
+        <article class="svc feat">
+          <svg class="svc-wm" viewBox="0 0 888.9 970.7" aria-hidden="true"><use href="#s-mark"/></svg>
           <div class="svc-top">
             <span class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path class="s" d="M5.5 26.5 9 15.8 19.6 5.2l7.2 7.2L16.2 23 5.5 26.5Z"/><path class="s" d="M5.5 26.5l7.6-7.6"/><circle class="t" cx="14.6" cy="17.4" r="2.4"/></svg></span>
             <span class="svc-num" aria-hidden="true">01</span>
@@ -893,14 +990,13 @@ textarea.inp{min-height:104px}
           <div class="svc-body">
             <span class="svc-en en" lang="en">Graphic Design</span>
             <h3>التصميم الغرافيكي</h3>
-            <p>تصاميم سوشيال ميديا، بوسترات، ومواد إعلانية بتشدّ العين وبتوصّل الفكرة بلمحة.</p>
-            <ul class="svc-tags"><li>منشورات سوشيال</li><li>بوسترات وإعلانات</li><li>مطبوعات</li><li>بانرات وأغلفة</li></ul>
+            <p>كل أنواع التصميم: سوشيال ميديا، بوسترات، مطبوعات، ومواد إعلانية بتشدّ العين وبتوصّل الفكرة بلمحة.</p>
+            <ul class="svc-tags"><li>سوشيال ميديا</li><li>مطبوعات</li><li>إعلانات</li><li>12 نوع وأكتر</li></ul>
           </div>
         </article>
       </div>
       <div class="svc-w" data-reveal style="--d:1">
-        <article class="svc feat">
-          <svg class="svc-wm" viewBox="0 0 888.9 970.7" aria-hidden="true"><use href="#s-mark"/></svg>
+        <article class="svc">
           <div class="svc-top">
             <span class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect class="s" x="9" y="9" width="14" height="14" rx="2.5" transform="rotate(45 16 16)"/><circle class="s" cx="16" cy="16" r="3.6"/><circle class="t" cx="25.4" cy="6.6" r="2.6"/></svg></span>
             <span class="svc-num" aria-hidden="true">02</span>
@@ -927,6 +1023,40 @@ textarea.inp{min-height:104px}
           </div>
         </article>
       </div>
+    </div>
+
+    <div class="dt">
+      <div class="dt-head" data-reveal>
+        <h3 class="h3">التصميم <span class="hl">بكل أنواعه</span></h3>
+        <p>من منشور سوشيال لكرت شخصي لهوية كاملة — كل شي بيحتاجه مشروعك بصرياً، بنفس الدقة والذوق.</p>
+      </div>
+      <ul class="dt-grid" role="list">
+        <li class="dt-i" data-reveal style="--d:0"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="s" d="M12 3.4 19.6 7.8v8.4L12 20.6l-7.6-4.4V7.8z"/><circle class="t" cx="12" cy="12" r="2.7"/></svg></span><span class="dt-t"><b>شعارات</b><small lang="en">Logos</small></span></li>
+        <li class="dt-i" data-reveal style="--d:1"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="3.5" y="3.5" width="17" height="17" rx="4.2"/><path class="s" d="m3.8 16 4.9-4.4 4 3.4 2.5-2 5 4"/><circle class="t" cx="15.6" cy="8.2" r="2"/></svg></span><span class="dt-t"><b>منشورات سوشيال</b><small lang="en">Social posts</small></span></li>
+        <li class="dt-i" data-reveal style="--d:2"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="5" y="2.5" width="14" height="19" rx="2.2"/><circle class="t" cx="12" cy="9.2" r="3.1"/><path class="s" d="M8.6 15.6h6.8M9.8 18.3h4.4"/></svg></span><span class="dt-t"><b>بوسترات وإعلانات</b><small lang="en">Posters &amp; ads</small></span></li>
+        <li class="dt-i" data-reveal style="--d:3"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="s" d="M3 5.6 9 3.5l6 2.1 6-2.1v14.9l-6 2.1-6-2.1-6 2.1z"/><path class="s" d="M9 3.5v14.9M15 5.6v14.9"/><circle class="t" cx="18" cy="9.4" r="1.7"/></svg></span><span class="dt-t"><b>بروشورات وفلايرات</b><small lang="en">Brochures &amp; flyers</small></span></li>
+        <li class="dt-i" data-reveal style="--d:4"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="2.5" y="6" width="19" height="12" rx="2.6"/><circle class="t" cx="7.6" cy="12" r="2.3"/><path class="s" d="M12 10.4h6M12 13.6h4"/></svg></span><span class="dt-t"><b>كروت شخصية</b><small lang="en">Business cards</small></span></li>
+        <li class="dt-i" data-reveal style="--d:5"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="s" d="M12 5.6C9.5 4.1 6.5 3.6 3.5 4v15c3-.4 6 .1 8.5 1.6 2.5-1.5 5.5-2 8.5-1.6V4c-3-.4-6 .1-8.5 1.6zM12 5.6v15"/><path class="s" d="M6 8.6h3.4M6 11.6h3.4M14.6 8.6H18"/><circle class="t" cx="16.3" cy="13.2" r="1.8"/></svg></span><span class="dt-t"><b>منيو مطاعم</b><small lang="en">Menus</small></span></li>
+        <li class="dt-i" data-reveal style="--d:0"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="s" d="M3.5 7.6 12 3.2l8.5 4.4v8.8L12 20.8l-8.5-4.4z"/><path class="s" d="M3.5 7.6 12 12l8.5-4.4M12 12v8.8"/><circle class="t" cx="16.4" cy="13.5" r="1.7"/></svg></span><span class="dt-t"><b>تغليف وستيكرات</b><small lang="en">Packaging &amp; labels</small></span></li>
+        <li class="dt-i" data-reveal style="--d:1"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="6" y="2.5" width="12" height="15" rx="1.6"/><path class="s" d="M12 17.5v3.2M8 21.3h8"/><rect class="t" x="8.6" y="6" width="6.8" height="3.4" rx="1"/></svg></span><span class="dt-t"><b>بانرات ولافتات</b><small lang="en">Banners &amp; signs</small></span></li>
+        <li class="dt-i" data-reveal style="--d:2"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="2.5" y="5" width="19" height="14" rx="3.6"/><path class="t" d="M10 9.1v5.8l4.9-2.9z"/></svg></span><span class="dt-t"><b>ثمبنيل وأغلفة</b><small lang="en">Thumbnails &amp; covers</small></span></li>
+        <li class="dt-i" data-reveal style="--d:3"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="3" y="5.5" width="18" height="13" rx="2.6"/><path class="s" d="m3.6 7.3 8.4 6 8.4-6"/><circle class="t" cx="12" cy="13.4" r="1.9"/></svg></span><span class="dt-t"><b>دعوات وتهاني</b><small lang="en">Invitations</small></span></li>
+        <li class="dt-i" data-reveal style="--d:4"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="s" d="M4 20.4h16"/><rect class="s" x="5.4" y="11" width="3.2" height="6.6" rx="1"/><rect class="s" x="10.4" y="5.8" width="3.2" height="11.8" rx="1"/><rect class="t" x="15.4" y="8.8" width="3.2" height="8.8" rx="1"/></svg></span><span class="dt-t"><b>إنفوغرافيك</b><small lang="en">Infographics</small></span></li>
+        <li class="dt-i" data-reveal style="--d:5"><span class="dt-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="s" x="6" y="2.5" width="12" height="19" rx="3"/><path class="s" d="M8.6 5.6h2.8M12.6 5.6h2.8"/><circle class="t" cx="12" cy="13" r="2.7"/></svg></span><span class="dt-t"><b>ستوريز وهايلايت</b><small lang="en">Stories &amp; highlights</small></span></li>
+      </ul>
+    </div>
+
+    <div class="xs" data-reveal>
+      <div class="xs-head">
+        <h3 class="h3">وكمان… <span class="hl">خدمات جانبية</span></h3>
+        <p>كل اللي بتحتاجه لشغلك أو دراستك — مرتّب، واضح، وبلمسة مصمّم.</p>
+      </div>
+      <ul class="xs-list" role="list">
+        <li class="xs-i"><b class="xs-lg" style="--tb:#3A1408;--tc:#FF8A65;--tl:#C43E1C" lang="en" aria-hidden="true">P</b><h4>عروض <span lang="en">PowerPoint</span></h4><p>عروض تقديمية مرتّبة وجذّابة لمشروعك، شركتك، أو دراستك.</p></li>
+        <li class="xs-i"><b class="xs-lg" style="--tb:#0B1F44;--tc:#6EA8FF;--tl:#185ABD" lang="en" aria-hidden="true">W</b><h4>ملفات <span lang="en">Word</span></h4><p>تنسيق تقارير، سير ذاتية، وملفات رسمية بشكل نظيف واحترافي.</p></li>
+        <li class="xs-i"><b class="xs-lg" style="--tb:#0A2E1C;--tc:#4ADE8A;--tl:#107C41" lang="en" aria-hidden="true">X</b><h4>جداول <span lang="en">Excel</span></h4><p>جداول منظّمة وسهلة القراءة، مع تنسيق ورسوم بيانية.</p></li>
+        <li class="xs-i"><b class="xs-lg" style="--tb:#0D2724;--tc:#3FC4B1;--tl:var(--teal-ink)" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a6 6 0 0 1-7.9 7.9l-6.3 6.3a2.1 2.1 0 0 1-3-3l6.3-6.3a6 6 0 0 1 7.9-7.9z"/></svg></b><h4>حلول تقنية وإعلامية</h4><p>مساعدة بالبرامج والملفات، وتجهيز محتوى إعلامي وإعداد حسابات السوشيال ميديا.</p></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1023,7 +1153,13 @@ textarea.inp{min-height:104px}
         <p class="cta-p">تصميم جديد، هوية لمشروعك، أو فيديو بدك يلفت الانتباه؟ اختار شو بتحتاج واكتب فكرتك، ورح تجهز رسالتك لحالها — بس انسخها وابعتها عالإنستغرام.</p>
         <div class="cta-direct">
           <small>أو راسلني مباشرة</small>
-          <a class="handle" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><span class="hi"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span>@haliddesigner.tr</a>
+          <div class="handles">
+            <a class="handle" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><span class="hi"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><span dir="ltr">@haliddesigner.tr</span></a>
+            <a class="handle" data-ch="whatsapp" hidden href="#" target="_blank" rel="noopener noreferrer"><span class="hi wa"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg></span><span data-ch-text>واتساب</span></a>
+            <a class="handle" data-ch="email" hidden href="#"><span class="hi ml"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span><span data-ch-text>إيميل</span></a>
+            <a class="handle" data-ch="facebook" hidden href="#" target="_blank" rel="noopener noreferrer"><span class="hi fb"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg></span><span>فيسبوك</span></a>
+            <a class="handle" data-ch="behance" hidden href="#" target="_blank" rel="noopener noreferrer"><span class="hi be"><svg class="ic" aria-hidden="true"><use href="#i-be"/></svg></span><span>بيهانس</span></a>
+          </div>
         </div>
       </div>
       <form class="brief" id="brief" novalidate>
@@ -1034,6 +1170,7 @@ textarea.inp{min-height:104px}
             <label class="opt"><input type="checkbox" name="svc" value="branding"><span>هوية بصرية</span></label>
             <label class="opt"><input type="checkbox" name="svc" value="video"><span>مونتاج فيديو</span></label>
             <label class="opt"><input type="checkbox" name="svc" value="social"><span>تصاميم سوشيال ميديا</span></label>
+            <label class="opt"><input type="checkbox" name="svc" value="extra"><span>خدمات جانبية</span></label>
           </div>
         </fieldset>
         <div class="frow">
@@ -1049,11 +1186,13 @@ textarea.inp{min-height:104px}
           <div class="bubble" id="bubble"></div>
         </div>
         <div class="brief-act">
+          <a class="btn btn-teal" id="mailBtn" data-ch="email" data-keep-href hidden href="#"><span>ابعتها عالإيميل</span><span class="btn-ic"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span></a>
+          <a class="btn btn-teal" id="waBtn" data-ch="whatsapp" data-keep-href hidden href="#" target="_blank" rel="noopener noreferrer"><span>ابعتها عالواتساب</span><span class="btn-ic"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg></span></a>
           <a class="btn btn-teal" id="sendBtn" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><span>انسخ الرسالة وافتح إنستغرام</span><span class="btn-ic"><svg class="ic" aria-hidden="true"><use href="#i-ext"/></svg></span></a>
           <button class="btn btn-line-light" type="button" id="copyBtn">انسخ فقط</button>
         </div>
         <p class="sr-only" role="status" id="briefStatus"></p>
-        <p class="brief-note">رح تنفتح صفحة خالد على إنستغرام: اكبس زر المراسلة والصق الرسالة وابعتها. ما في أي بيانات بتنحفظ أو بتنبعت من هالصفحة.</p>
+        <p class="brief-note" id="briefNote">رح تنفتح صفحة خالد على إنستغرام: اكبس زر المراسلة والصق الرسالة وابعتها. ما في أي بيانات بتنحفظ أو بتنبعت من هالصفحة.</p>
       </form>
     </div>
   </div>
@@ -1065,10 +1204,12 @@ textarea.inp{min-height:104px}
   <div class="container">
     <div class="ftr-top">
       <p>من فكرة بسيطة إلى تصميم يترك <span class="nw">أثرًا<i class="tdot" aria-hidden="true"></i></span></p>
-      <nav class="ftr-links" aria-label="روابط التذييل">
-        <a href="#services">الخدمات</a><a href="#work">الأعمال</a><a href="#process">طريقة الشغل</a><a href="#about">من أنا</a><a href="#contact">تواصل</a>
-        <a href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer">إنستغرام ↖</a>
-      </nav>
+      <div class="ftr-nav">
+        <nav class="ftr-links" aria-label="روابط التذييل">
+          <a href="#services">الخدمات</a><a href="#work">الأعمال</a><a href="#process">طريقة الشغل</a><a href="#about">من أنا</a><a href="#contact">تواصل</a>
+        </nav>
+        <div class="socials"><a class="soc ig" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span class="sr-only">إنستغرام</span></a><a class="soc wa" data-ch="whatsapp" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span class="sr-only">واتساب</span></a><a class="soc fb" data-ch="facebook" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span class="sr-only">فيسبوك</span></a><a class="soc be" data-ch="behance" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-be"/></svg><span class="sr-only">بيهانس</span></a><a class="soc ml" data-ch="email" hidden href="#"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span class="sr-only">إيميل</span></a></div>
+      </div>
     </div>
   </div>
   <span class="ftr-big" data-t="HALID" data-reveal-fill aria-hidden="true">HALID</span>
@@ -1094,6 +1235,7 @@ textarea.inp{min-height:104px}
   </div>
 </dialog>
 
+<a class="wa-fab" id="waFab" data-ch="whatsapp" hidden href="#" target="_blank" rel="noopener noreferrer" aria-label="راسلني على واتساب"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg></a>
 <div class="toast" id="toast" role="status" aria-live="polite"><i aria-hidden="true">✓</i><span id="toastTxt"></span></div>
 <div class="cur" id="cur" aria-hidden="true"><span>شوف</span></div>
 
@@ -1131,6 +1273,21 @@ const WORKS = [
     desc:'من اللقطة الخام لفيديو جاهز للنشر: قصّ، إيقاع، تلوين، صوت، وموشن للنصوص.' },
 ];
 const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصرية', video:'مونتاج فيديو' };
+
+/* =====================================================================
+   ✏️  وسائل التواصل — عبّي اللي عندك، والفاضي ما بيظهر بالموقع
+   ---------------------------------------------------------------------
+   whatsapp : الرقم الدولي أرقام بس، بدون + وبدون 00 — مثلاً '905xxxxxxxxx'
+   email    : الإيميل اللي بتوصل عليه رسائل الزباين
+   facebook : رابط صفحة الفيسبوك كامل
+   behance  : (اختياري) رابط Behance أو أي منصة أعمال
+   ===================================================================== */
+const CONTACT = {
+  whatsapp: '',
+  email:    '',
+  facebook: '',
+  behance:  '',
+};
 
 (() => {
   'use strict';
@@ -1215,6 +1372,95 @@ const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصري
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); burger.focus(); } });
   matchMedia('(min-width: 921px)').addEventListener?.('change', (m) => { if (m.matches) setMenu(false); });
 
+  /* ---------- contact channels (empty in CONTACT = stays hidden) ---------- */
+  const waNum = String(CONTACT.whatsapp || '').replace(/\D/g, '').replace(/^00/, '');
+  const mail = String(CONTACT.email || '').trim();
+  /* forgiving links: 'facebook.com/x' → 'https://facebook.com/x'; say why a value was dropped */
+  const link = (k) => {
+    let v = String(CONTACT[k] || '').trim();
+    if (v && !/^https?:\/\//i.test(v) && /^[\w-]+(\.[\w-]+)+(\/|$)/.test(v)) v = 'https://' + v;
+    if (CONTACT[k] && !/^https?:\/\/[^\s]+\.[^\s]+/i.test(v)) { console.warn(`CONTACT.${k}: needs a full link, e.g. https://www.${k}.com/…`); return ''; }
+    return v;
+  };
+  if (CONTACT.whatsapp && (/^0[1-9]/.test(waNum) || waNum.length < 8)) console.warn('CONTACT.whatsapp: use the international number, digits only (e.g. 90532…)');
+  if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) console.warn('CONTACT.email: does not look like an email address');
+  const waURL = (t) => `https://wa.me/${waNum}` + (t ? `?text=${encodeURIComponent(t)}` : '');
+  const mailURL = (t) => `mailto:${mail}?subject=${encodeURIComponent('مشروع جديد — من موقعك')}` + (t ? `&body=${encodeURIComponent(t.replace(/\n/g, '\r\n'))}` : '');
+  const CH = {
+    whatsapp: waNum ? waURL('مرحبا خالد 👋\n(وصلتلك من موقعك ✨)') : '',
+    email: mail ? `mailto:${mail}` : '',
+    facebook: link('facebook'),
+    behance: link('behance'),
+  };
+  $$('[data-ch]').forEach(el => {
+    const k = el.dataset.ch; if (!CH[k]) return;
+    if (!el.hasAttribute('data-keep-href')) el.href = CH[k];
+    el.hidden = false;
+    const t = $('[data-ch-text]', el);
+    if (t) {
+      t.dir = 'ltr';
+      if (k === 'whatsapp') t.textContent = '+' + waNum;
+      else { const at = mail.lastIndexOf('@'); if (at > 0) t.replaceChildren(mail.slice(0, at), document.createElement('wbr'), mail.slice(at)); else t.textContent = mail; }
+    }
+  });
+  /* floating WhatsApp: after the hero, hidden while the contact block is on screen */
+  const fab = $('#waFab');
+  if (fab && waNum) {
+    let pastHero = false, atContact = false, atFooter = false;
+    const sync = () => fab.classList.toggle('show', pastHero && !atContact && !atFooter);
+    new IntersectionObserver(([en]) => { pastHero = !en.isIntersecting; sync(); }).observe($('#top'));
+    new IntersectionObserver(([en]) => { atContact = en.isIntersecting; sync(); }, { threshold: .15 }).observe($('#contact'));
+    const ftr = $('.ftr'); if (ftr) new IntersectionObserver(([en]) => { atFooter = en.isIntersecting; sync(); }).observe(ftr);
+  }
+  $('.mnav-foot')?.classList.toggle('many', $$('.mnav .soc:not([hidden])').length > 2);
+
+  /* ---------- intro: types «أهلاً، أنا خالد» once per browser session ---------- */
+  const introEl = $('#intro');
+  let introDone = !root.classList.contains('intro') || !introEl;
+  const introWaiters = [];
+  const whenIntroDone = (fn) => { if (introDone) fn(); else introWaiters.push(fn); };
+  if (!introDone) {
+    introEl.style.animation = 'none';
+    try { sessionStorage.setItem('halid-intro', '1'); } catch (_) {}
+    try { document.cookie = 'halid-intro=1; path=/; SameSite=Lax'; } catch (_) {}
+    const txt = $('#introTxt'), full = 'أهلاً، أنا خالد';
+    const parts = (window.Intl && Intl.Segmenter) ? [...new Intl.Segmenter('ar', { granularity: 'grapheme' }).segment(full)].map(x => x.segment) : [...full];
+    let k = 0, tmr = 0, ended = false;
+    let left = false;
+    const leave = () => {
+      if (left) return; left = true; clearTimeout(tmr); clearTimeout(net);
+      introEl.classList.add('out');
+      setTimeout(() => { introDone = true; introWaiters.splice(0).forEach(fn => fn()); }, 300);
+      let gone = false; const rm = () => { if (gone) return; gone = true; root.classList.remove('intro'); introEl.remove(); };
+      introEl.addEventListener('transitionend', (e) => { if (e.target === introEl) rm(); }); setTimeout(rm, 1000);
+      ['pointerdown', 'touchstart', 'scroll'].forEach(ev => removeEventListener(ev, skip));
+      removeEventListener('wheel', hold); removeEventListener('touchmove', hold); removeEventListener('keydown', holdKey);
+    };
+    const end = (fast) => {
+      if (ended) return; ended = true; clearTimeout(tmr);
+      txt.textContent = full; introEl.classList.add('done');
+      tmr = setTimeout(leave, fast ? 160 : 450);
+    };
+    const type = () => {
+      txt.textContent = parts.slice(0, ++k).join('');
+      if (k >= parts.length) { end(false); return; }
+      tmr = setTimeout(type, parts[k - 1] === '،' ? 220 : 64);
+    };
+    function skip() { if (!ended) end(true); else leave(); }
+    const SCROLL_KEYS = [' ', 'PageDown', 'PageUp', 'ArrowDown', 'ArrowUp', 'Home', 'End'];
+    function hold(e) { if (e.cancelable) e.preventDefault(); skip(); }
+    function holdKey(e) { if (SCROLL_KEYS.includes(e.key)) e.preventDefault(); skip(); }
+    ['pointerdown', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, skip, { passive: true }));
+    addEventListener('wheel', hold, { passive: false }); addEventListener('touchmove', hold, { passive: false }); addEventListener('keydown', holdKey);
+    const net = setTimeout(leave, 6000);
+    if (performance.now() > 3000) leave();   /* slow device: the visitor already waited — no greeting */
+    else {
+      const go = () => { if (!k && !ended) requestAnimationFrame(type); };
+      const fontsIn = document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 600))]) : Promise.resolve();
+      fontsIn.then(() => setTimeout(go, Math.max(0, 650 - performance.now())));   /* the mark lands first */
+    }
+  }
+
   /* ---------- hero: split headline into words, then play entrance ---------- */
   const splitWords = (el) => {
     let i = 0;
@@ -1250,9 +1496,9 @@ const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصري
   $$('[data-split]').forEach(splitWords);
   const startHero = () => requestAnimationFrame(() => requestAnimationFrame(() => hero.classList.add('is-in')));
   if (document.fonts && document.fonts.ready) {
-    let done = false; const go = () => { if (!done) { done = true; startHero(); } };
+    let done = false; const go = () => { if (!done) { done = true; whenIntroDone(startHero); } };
     document.fonts.ready.then(go); setTimeout(go, 1200);
-  } else startHero();
+  } else whenIntroDone(startHero);
 
   /* hero parallax (desktop) */
   const hv = $('#heroVisual');
@@ -1491,12 +1737,22 @@ const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصري
   }
 
   /* ---------- brief builder → ready-to-send Instagram message ---------- */
-  const SVC_AR = { design: 'تصميم غرافيكي', branding: 'هوية بصرية', video: 'مونتاج فيديو', social: 'تصاميم سوشيال ميديا' };
+  const SVC_AR = { design: 'تصميم غرافيكي', branding: 'هوية بصرية', video: 'مونتاج فيديو', social: 'تصاميم سوشيال ميديا', extra: 'شغل أوفيس أو تقني' };
+  const sendBtns = ['#mailBtn', '#waBtn', '#sendBtn'].map(q => $(q)).filter(b => b && !b.hidden);
+  sendBtns.forEach((b, i) => { b.classList.toggle('btn-teal', i === 0); b.classList.toggle('btn-line-light', i > 0); });
+  if (waNum || mail) {
+    const via = mail && waNum ? 'عالإيميل أو الواتساب' : mail ? 'عالإيميل' : 'عالواتساب';
+    $('.cta-p').textContent = `تصميم جديد، هوية لمشروعك، أو فيديو بدك يلفت الانتباه؟ اختار شو بتحتاج واكتب فكرتك، ورح تجهز رسالتك لحالها — ابعتها بكبسة ${via}.`;
+    $('#briefNote').textContent = 'بتشوف رسالتك وبتعدّل عليها بتطبيقك قبل ما تبعتها. الموقع ما بيحفظ أي شي.';
+  }
   const form = $('#brief'), bubble = $('#bubble');
   const joinAr = (a) => a.length < 2 ? (a[0] || '') : a.slice(0, -1).join('، ') + ' و' + a[a.length - 1];
   let msg = '';
+  const ideaEl = $('#bIdea'), ideaPh = ideaEl ? ideaEl.placeholder : '';
   function buildMsg(bump) {
-    const svcs = $$('input[name="svc"]:checked', form).map(i => SVC_AR[i.value]);
+    const checked = $$('input[name="svc"]:checked', form).map(i => i.value);
+    const svcs = checked.map(v => SVC_AR[v]);
+    if (ideaEl) ideaEl.placeholder = checked.length === 1 && checked[0] === 'extra' ? 'مثلاً: عرض PowerPoint لمشروع التخرج، أو تنسيق ملف Word…' : ideaPh;
     const name = $('#bName').value.trim(), idea = $('#bIdea').value.trim();
     const lines = ['مرحبا خالد 👋'];
     if (name) lines.push(`معك ${name}.`);
@@ -1505,6 +1761,8 @@ const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصري
     lines.push('(وصلتلك من موقعك ✨)');
     msg = lines.join('\n');
     bubble.textContent = msg;
+    if (waNum) $('#waBtn').href = waURL(msg);
+    if (mail) $('#mailBtn').href = mailURL(idea.length > 300 ? msg.replace(idea, () => idea.slice(0, 300) + '…') : msg);
     if (bump && !reduce) { bubble.classList.remove('bump'); void bubble.offsetWidth; bubble.classList.add('bump'); }
     if (bump) $('#briefStatus').textContent = 'تحدّثت رسالتك: ' + (svcs.join('، ') || 'بدون خدمة محددة');
   }
@@ -1522,6 +1780,7 @@ const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصري
     }
   };
   $('#sendBtn')?.addEventListener('click', () => { copyText(msg).then(ok => toast(ok ? 'نسخنا رسالتك، اكبس «مراسلة» بإنستغرام والصقها' : 'فتحنا إنستغرام، انسخ الرسالة من الصفحة', !ok)); });
+  $('#mailBtn')?.addEventListener('click', () => { copyText(msg).then(ok => toast(ok ? `فتحنا الإيميل — وإذا ما انفتح، رسالتك منسوخة: ابعتها على ${mail}` : `إذا ما انفتح الإيميل، ابعت رسالتك على ${mail}`, !ok)); });
   $('#copyBtn')?.addEventListener('click', () => { copyText(msg).then(ok => toast(ok ? 'تم نسخ الرسالة' : 'ما قدرنا ننسخ تلقائياً، حدّد النص وانسخه', !ok)); });
 
   /* ---------- magnetic buttons ---------- */
