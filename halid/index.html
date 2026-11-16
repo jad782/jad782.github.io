@@ -1283,8 +1283,8 @@ const CAT_AR = { design:'تصميم غرافيكي', branding:'هوية بصري
    behance  : (اختياري) رابط Behance أو أي منصة أعمال
    ===================================================================== */
 const CONTACT = {
-  whatsapp: '',
-  email:    '',
+  whatsapp: '905510321800',
+  email:    'haliddesigner.tr@gmail.com',
   facebook: '',
   behance:  '',
 };
@@ -1399,7 +1399,7 @@ const CONTACT = {
     const t = $('[data-ch-text]', el);
     if (t) {
       t.dir = 'ltr';
-      if (k === 'whatsapp') t.textContent = '+' + waNum;
+      if (k === 'whatsapp') t.textContent = /^90\d{10}$/.test(waNum) ? waNum.replace(/^(90)(\d{3})(\d{3})(\d{2})(\d{2})$/, '+$1 $2 $3 $4 $5') : '+' + waNum;
       else { const at = mail.lastIndexOf('@'); if (at > 0) t.replaceChildren(mail.slice(0, at), document.createElement('wbr'), mail.slice(at)); else t.textContent = mail; }
     }
   });
