@@ -181,7 +181,7 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .menu-open .burger span::after{top:0;transform:rotate(-45deg)}
 
 /* Mobile menu */
-.mnav{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto;overscroll-behavior:contain;padding:min(120px,max(84px,18svh)) var(--gutter) max(32px,env(safe-area-inset-bottom));background:radial-gradient(90% 60% at 0% 0%,rgba(52,181,163,.22),transparent 60%),linear-gradient(165deg,#4A1F5B,#21102A);color:#F6F3EF;clip-path:circle(0 at 40px 48px);visibility:hidden;transition:clip-path .8s var(--ease-io),visibility 0s .8s}
+.mnav{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:space-between;gap:16px;overflow:hidden;padding:min(120px,max(84px,18svh)) var(--gutter) max(32px,env(safe-area-inset-bottom));background:radial-gradient(90% 60% at 0% 0%,rgba(52,181,163,.22),transparent 60%),linear-gradient(165deg,#4A1F5B,#21102A);color:#F6F3EF;clip-path:circle(0 at 40px 48px);visibility:hidden;transition:clip-path .8s var(--ease-io),visibility 0s .8s}
 .menu-open .mnav{clip-path:circle(150% at 40px 48px);visibility:visible;transition:clip-path .8s var(--ease-io),visibility 0s}
 .menu-open .hdr .brand,.menu-open .hdr .icon-btn{color:#F6F3EF}
 .menu-open .hdr .icon-btn{border-color:rgba(246,243,239,.22);background:transparent}
@@ -189,9 +189,9 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .menu-open .hdr .brand-mark{--mb:#F6F3EF}
 .menu-open .hdr .brand-txt small{color:rgba(246,243,239,.6)}
 .menu-open .hdr.scrolled .hdr-in{background:transparent;border-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-.mnav ol{display:grid;gap:4px;counter-reset:m}
-.mnav li{overflow:hidden}
-.mnav ol a{display:flex;align-items:baseline;gap:14px;font-family:var(--font-display);font-weight:700;font-size:clamp(26px,min(10vw,5.8svh),54px);line-height:1.35;transform:translateY(105%);transition:transform .7s var(--ease)}
+.mnav ol{--mf:clamp(26px,min(10vw,5.8svh),54px);display:grid;grid-auto-rows:max-content;gap:4px;counter-reset:m;flex:0 1 auto;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding-block:calc(var(--mf) * .3) calc(var(--mf) * .35);margin-block:calc(var(--mf) * -.3) calc(var(--mf) * -.35)}
+.mnav li{overflow:hidden;padding-block:calc(var(--mf) * .3) calc(var(--mf) * .35);margin-block:calc(var(--mf) * -.3) calc(var(--mf) * -.35)}
+.mnav ol a{display:flex;align-items:baseline;gap:14px;font-family:var(--font-display);font-weight:700;font-size:var(--mf);line-height:1.35;transform:translateY(140%);transition:transform .7s var(--ease)}
 .mnav ol a::before{counter-increment:m;content:"0" counter(m);font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:18px;color:var(--teal);direction:ltr}
 .menu-open .mnav ol a{transform:none;transition-delay:calc(.25s + var(--i)*.06s)}
 .mnav-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;opacity:0;transition:opacity .5s .5s}
@@ -462,6 +462,8 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 
 /* Clients — «عملائي»: a hairline logo wall. Logos are one-colour masks (they follow the theme);
    hover floods the tile with the client's own brand colour from the pointer, like Khalid's slide 1 */
+#clHead .lead{text-wrap:pretty}
+.cl-hint{display:block;margin-top:.5em}
 .cl-grid{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--line);background-clip:padding-box;overflow:hidden;isolation:isolate}
 .cl-grid::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--gx,-600px) var(--gy,-600px),var(--teal),transparent 70%);opacity:0;transition:opacity .5s}
 .cl-grid.glow::before{opacity:.85}
@@ -469,17 +471,19 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .cl-b{--lb:38cqw;position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-width:0;aspect-ratio:16/10;padding:18px;color:var(--ink);text-align:center;overflow:hidden;isolation:isolate;container-type:inline-size;transition:color .45s var(--ease)}
 .cl-fill{position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 95% at 22% 0%,color-mix(in oklab,var(--bc),#fff 16%),transparent 60%),linear-gradient(to top,var(--bcd) 0 32%,var(--bc) 80%);clip-path:circle(0% at var(--mx,50%) var(--my,50%));transition:clip-path .7s var(--ease-io)}
 .cl-in{display:grid;place-items:center}
-.cl-logo{display:block;width:calc(var(--k,1)*var(--lb));height:calc(var(--lb)/var(--k,1));max-width:74cqw;max-height:46cqw;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;opacity:.74;transition:opacity .45s,transform .8s var(--ease)}
+.cl-logo{display:block;width:calc(var(--k,1)*var(--lb)*var(--o,1));height:calc(var(--lb)/var(--k,1)*var(--o,1));max-width:74cqw;max-height:46cqw;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;opacity:.74;transition:opacity .45s,transform .8s var(--ease)}
 .cl-cap{position:absolute;inset-inline:14px;bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff;text-align:start;opacity:0;transform:translateY(10px);transition:opacity .35s,transform .6s var(--ease)}
 .cl-ct{display:flex;flex-direction:column;min-width:0;line-height:1.35}
-.cl-ct b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cl-ct small{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* the clip that makes the ellipsis reaches .3em lower, so dots under a final ي (الحمصي) are never cut */
+.cl-ct b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 .25em .3em;margin:0 -.25em -.3em}
+.cl-ct small{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 .25em .3em;margin:0 -.25em -.3em}
 .cl-go{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);transition:transform .5s var(--ease)}
 .cl-go .ic{width:16px;height:16px}
 @container (max-width:230px){.cl-ct small{display:none}.cl-cap{bottom:10px}}
+@container (max-width:175px){.cl-ct b{font-size:12.5px}.cl-cap{gap:8px;inset-inline:12px}}
 /* keyboard focus: a rounded inner ring that stays inside the grid's corner arcs */
 .cl-b:focus-visible{color:#fff;outline:0}
-.cl-b:focus-visible::after{content:"";position:absolute;inset:6px;border:2px solid #fff;border-radius:14px;pointer-events:none}
+.cl-b:focus-visible::after{content:"";position:absolute;inset:6px;border:2px solid #fff;pointer-events:none;border-radius:var(--rtl,var(--rr,14px)) var(--rtr,var(--rr,14px)) var(--rbr,var(--rr,14px)) var(--rbl,var(--rr,14px))}
 .cl-b:focus-visible .cl-fill{clip-path:circle(142% at 50% 50%)}
 .cl-b:focus-visible .cl-logo{opacity:1;transform:translateY(-20px) scale(.94)}
 .cl-b:focus-visible .cl-cap{opacity:1;transform:none}
@@ -518,7 +522,7 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .cl-cta .cl-b:hover small .ic{transform:translateX(-4px)}
 .cl-cta .cl-b:focus-visible{color:var(--ink)}
 .cl-cta .cl-b:focus-visible::after{border-color:var(--teal-ink)}
-@media (max-width:720px){.cl-b:focus-visible::after{border-radius:10px}}
+@media (max-width:720px){.cl-grid{--rr:10px}}
 @media (forced-colors:active){.cl-logo{forced-color-adjust:none;background:CanvasText}.cl-fill{display:none}}
 
 /* Achievements — «إنجازاتي»: big numbers that count up once, on a scoreboard line */
@@ -863,6 +867,8 @@ html:has(.pv[open]){overflow:hidden}
 @media (max-width:720px){.cl-grid{grid-template-columns:repeat(3,minmax(0,1fr));border-radius:var(--radius)}}
 @media (max-width:600px){.st-list{grid-template-columns:minmax(0,1fr)}.st-i{display:flex;align-items:center;gap:clamp(12px,4vw,20px);padding:16px 2px 14px}.st-n{flex:0 0 46%;font-size:min(clamp(40px,12vw,54px),calc(46cqw / (var(--len,3) * .7)))}.st-l{margin-top:0;min-width:0}}
 @media (max-width:480px){.cl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cl-b{aspect-ratio:1/.84}}
+/* a phone held sideways: the menu's six items in two columns and its foot in one row, so it all fits without scrolling */
+@media (max-height:440px) and (min-width:480px){.mnav ol{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(16px,4vw,40px)}.mnav-foot{flex-wrap:nowrap}.mnav-foot.many .btn{flex:0 0 auto}}
 @media (hover:none){.svc:hover,.tool:hover,.dt-i:hover{transform:none}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -1581,6 +1587,7 @@ const CONTACT = {
   };
   burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
   $$('a', mnav).forEach(a => a.addEventListener('click', () => setMenu(false)));
+  $('.hdr .brand')?.addEventListener('click', () => { if (document.body.classList.contains('menu-open')) setMenu(false); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); burger.focus(); } });
   matchMedia('(min-width: 921px)').addEventListener?.('change', (m) => { if (m.matches) setMenu(false); });
 
@@ -2005,11 +2012,11 @@ const CONTACT = {
       clGrid.innerHTML = CL.map((c, i) => {
         const pi = c.project ? HV.find(c.project) : -1;
         if (c.project && pi < 0) console.warn('HALID_CLIENTS: no project "' + c.project + '" for', c.name);
-        const bc = col(c.c) || '#502462', k = Math.max(.4, Math.min(2.6, +c.k || 1));
+        const bc = col(c.c) || '#502462', k = Math.max(.4, Math.min(2.6, +c.k || 1)), o = Math.max(.8, Math.min(1.25, +c.o || 1));
         const inner = `<span class="cl-fill" aria-hidden="true"></span>`
           + `<span class="cl-in" aria-hidden="true"><span class="cl-logo" style="--m:url('${esc(IMG + encodeURIComponent(c.img))}')"></span></span>`
           + `<span class="cl-cap" aria-hidden="true"><span class="cl-ct"><b>${esc(c.name)}</b>${c.kind ? `<small>${esc(c.kind)}</small>` : ''}</span>${pi >= 0 ? `<span class="cl-go">${arrow}</span>` : ''}</span>`;
-        const style = `--bc:${bc};--bcd:${col(c.cd) || bc};--k:${k};--i:${i}`;
+        const style = `--bc:${bc};--bcd:${col(c.cd) || bc};--k:${k};--o:${o};--i:${i}`;
         if (pi >= 0) linked++;
         return `<li class="cl" style="${style}">` + (pi >= 0
           ? `<button class="cl-b" type="button" data-p="${pi}" aria-label="${esc(c.name + ' — شوف الهوية')}">${inner}</button>`
@@ -2022,6 +2029,11 @@ const CONTACT = {
       const fit = () => {
         const cols = getComputedStyle(clGrid).gridTemplateColumns.split(' ').length, r = CL.length % cols;
         cta.hidden = !r; cta.style.gridColumn = r ? `span ${cols - r}` : '';
+        const g = clGrid.getBoundingClientRect(), R = Math.max(0, (parseFloat(getComputedStyle(clGrid).borderTopLeftRadius) || 0) - 7) + 'px';
+        $$('.cl', clGrid).forEach(li => {
+          const b = li.getBoundingClientRect(), T = b.top - g.top < 4, B = g.bottom - b.bottom < 4, L = b.left - g.left < 4, Rt = g.right - b.right < 4;
+          [['--rtl', T && L], ['--rtr', T && Rt], ['--rbr', B && Rt], ['--rbl', B && L]].forEach(([p, on]) => on && !li.hidden ? li.style.setProperty(p, R) : li.style.removeProperty(p));
+        });
       };
       let fitT = 0; addEventListener('resize', () => { cancelAnimationFrame(fitT); fitT = requestAnimationFrame(fit); });
       $('a', cta).addEventListener('click', (e) => { e.preventDefault(); goContact(); });
