@@ -181,7 +181,7 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .menu-open .burger span::after{top:0;transform:rotate(-45deg)}
 
 /* Mobile menu */
-.mnav{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:space-between;padding:120px var(--gutter) max(32px,env(safe-area-inset-bottom));background:radial-gradient(90% 60% at 0% 0%,rgba(52,181,163,.22),transparent 60%),linear-gradient(165deg,#4A1F5B,#21102A);color:#F6F3EF;clip-path:circle(0 at 40px 48px);visibility:hidden;transition:clip-path .8s var(--ease-io),visibility 0s .8s}
+.mnav{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto;overscroll-behavior:contain;padding:min(120px,max(84px,18svh)) var(--gutter) max(32px,env(safe-area-inset-bottom));background:radial-gradient(90% 60% at 0% 0%,rgba(52,181,163,.22),transparent 60%),linear-gradient(165deg,#4A1F5B,#21102A);color:#F6F3EF;clip-path:circle(0 at 40px 48px);visibility:hidden;transition:clip-path .8s var(--ease-io),visibility 0s .8s}
 .menu-open .mnav{clip-path:circle(150% at 40px 48px);visibility:visible;transition:clip-path .8s var(--ease-io),visibility 0s}
 .menu-open .hdr .brand,.menu-open .hdr .icon-btn{color:#F6F3EF}
 .menu-open .hdr .icon-btn{border-color:rgba(246,243,239,.22);background:transparent}
@@ -191,7 +191,7 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .menu-open .hdr.scrolled .hdr-in{background:transparent;border-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
 .mnav ol{display:grid;gap:4px;counter-reset:m}
 .mnav li{overflow:hidden}
-.mnav ol a{display:flex;align-items:baseline;gap:14px;font-family:var(--font-display);font-weight:700;font-size:clamp(34px,10vw,54px);line-height:1.35;transform:translateY(105%);transition:transform .7s var(--ease)}
+.mnav ol a{display:flex;align-items:baseline;gap:14px;font-family:var(--font-display);font-weight:700;font-size:clamp(26px,min(10vw,5.8svh),54px);line-height:1.35;transform:translateY(105%);transition:transform .7s var(--ease)}
 .mnav ol a::before{counter-increment:m;content:"0" counter(m);font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:18px;color:var(--teal);direction:ltr}
 .menu-open .mnav ol a{transform:none;transition-delay:calc(.25s + var(--i)*.06s)}
 .mnav-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;opacity:0;transition:opacity .5s .5s}
@@ -459,6 +459,87 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .works-foot small{font-size:13px;font-weight:600;opacity:.75;font-variant-numeric:tabular-nums}
 .ig-link{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--ink-2);padding:8px 4px;border-bottom:1px solid var(--line-2);transition:color .3s,border-color .3s}
 .ig-link:hover{color:var(--ink);border-color:var(--teal)}
+
+/* Clients — «عملائي»: a hairline logo wall. Logos are one-colour masks (they follow the theme);
+   hover floods the tile with the client's own brand colour from the pointer, like Khalid's slide 1 */
+.cl-grid{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--line);background-clip:padding-box;overflow:hidden;isolation:isolate}
+.cl-grid::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--gx,-600px) var(--gy,-600px),var(--teal),transparent 70%);opacity:0;transition:opacity .5s}
+.cl-grid.glow::before{opacity:.85}
+.cl{position:relative;display:flex;min-width:0;background:var(--surface)}
+.cl-b{--lb:38cqw;position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-width:0;aspect-ratio:16/10;padding:18px;color:var(--ink);text-align:center;overflow:hidden;isolation:isolate;container-type:inline-size;transition:color .45s var(--ease)}
+.cl-fill{position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 95% at 22% 0%,color-mix(in oklab,var(--bc),#fff 16%),transparent 60%),linear-gradient(to top,var(--bcd) 0 32%,var(--bc) 80%);clip-path:circle(0% at var(--mx,50%) var(--my,50%));transition:clip-path .7s var(--ease-io)}
+.cl-in{display:grid;place-items:center}
+.cl-logo{display:block;width:calc(var(--k,1)*var(--lb));height:calc(var(--lb)/var(--k,1));max-width:74cqw;max-height:46cqw;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;opacity:.74;transition:opacity .45s,transform .8s var(--ease)}
+.cl-cap{position:absolute;inset-inline:14px;bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff;text-align:start;opacity:0;transform:translateY(10px);transition:opacity .35s,transform .6s var(--ease)}
+.cl-ct{display:flex;flex-direction:column;min-width:0;line-height:1.35}
+.cl-ct b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl-ct small{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl-go{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);transition:transform .5s var(--ease)}
+.cl-go .ic{width:16px;height:16px}
+@container (max-width:230px){.cl-ct small{display:none}.cl-cap{bottom:10px}}
+/* keyboard focus: a rounded inner ring that stays inside the grid's corner arcs */
+.cl-b:focus-visible{color:#fff;outline:0}
+.cl-b:focus-visible::after{content:"";position:absolute;inset:6px;border:2px solid #fff;border-radius:14px;pointer-events:none}
+.cl-b:focus-visible .cl-fill{clip-path:circle(142% at 50% 50%)}
+.cl-b:focus-visible .cl-logo{opacity:1;transform:translateY(-20px) scale(.94)}
+.cl-b:focus-visible .cl-cap{opacity:1;transform:none}
+@media (hover:hover){
+  button.cl-b:hover,div.cl-b:hover{color:#fff}
+  button.cl-b:hover .cl-fill,div.cl-b:hover .cl-fill{clip-path:circle(142% at var(--mx,50%) var(--my,50%))}
+  button.cl-b:hover .cl-logo,div.cl-b:hover .cl-logo{opacity:1;transform:translateY(-20px) scale(.94)}
+  button.cl-b:hover .cl-cap,div.cl-b:hover .cl-cap{opacity:1;transform:none}
+  button.cl-b:hover .cl-go{transform:translateX(-3px)}
+  /* short tiles: lift less, shrink more, so the logo clears both the edge and the caption */
+  @container (max-width:230px){button.cl-b:hover .cl-logo,div.cl-b:hover .cl-logo,.cl-b:focus-visible .cl-logo{transform:translateY(-15px) scale(.8)}}
+}
+@media (hover:none){
+  .cl-b{--lb:40cqw;gap:8px;padding:14px 12px}
+  .cl:not(.cl-cta)>.cl-b{justify-content:flex-end}
+  .cl-in{flex:1;align-self:stretch}
+  .cl-cap{position:static;inset:auto;justify-content:center;max-width:100%;color:var(--muted);opacity:1;transform:none}
+  .cl-ct{align-items:center}
+  .cl-ct b{font-size:12.5px}
+  .cl-ct small,.cl-go{display:none}
+  .cl-b:focus-visible .cl-cap{color:#fff}
+  .cl-b:focus-visible .cl-logo{transform:none}
+}
+@media (hover:none) and (min-width:481px){.cl-b{aspect-ratio:4/3}}
+/* entrance: the logos settle in one after another */
+.js .cl-grid .cl-in{opacity:0;transform:scale(.86);filter:blur(6px)}
+.js .cl-grid.in .cl-in{opacity:1;transform:none;filter:none;transition:opacity .9s var(--ease),transform 1.1s var(--ease),filter .9s var(--ease);transition-delay:calc(var(--i,0)*70ms + 200ms)}
+/* the empty spot after the last logo invites the next client (contain:size → it never sets the row height) */
+.cl-cta{contain:size}
+@container (max-width:170px){.cl-cta b{font-size:14px;line-height:1.3}.cl-cta small{font-size:12px;gap:4px}.cl-cta small .ic{display:none}}
+.cl-cta .cl-b{aspect-ratio:auto;gap:6px;color:var(--ink);background:color-mix(in srgb,var(--accent) 5%,var(--surface));transition:background-color .4s}
+.cl-cta .cl-b:hover{background:color-mix(in srgb,var(--accent) 9%,var(--surface))}
+.cl-cta b{font-family:var(--font-display);font-weight:700;font-size:clamp(16px,1.4vw,19px);line-height:1.4}
+.cl-cta small{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--teal-ink)}
+.cl-cta small .ic{width:17px;height:17px;transition:transform .5s var(--ease)}
+.cl-cta .cl-b:hover small .ic{transform:translateX(-4px)}
+.cl-cta .cl-b:focus-visible{color:var(--ink)}
+.cl-cta .cl-b:focus-visible::after{border-color:var(--teal-ink)}
+@media (max-width:720px){.cl-b:focus-visible::after{border-radius:10px}}
+@media (forced-colors:active){.cl-logo{forced-color-adjust:none;background:CanvasText}.cl-fill{display:none}}
+
+/* Achievements — «إنجازاتي»: big numbers that count up once, on a scoreboard line */
+.st{margin-top:clamp(64px,8vw,112px)}
+#clGrid[hidden]+.st{margin-top:0}
+.st-head{margin-bottom:clamp(18px,2.4vw,30px)}
+.st-t{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,2.6vw,36px);line-height:1.3;margin-top:6px}
+.st-t .hl{color:var(--accent)}
+.st-list{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:1px;container-type:inline-size;background:var(--line);border-block:1px solid var(--line)}
+.st-i{position:relative;background:var(--bg);padding:clamp(24px,3vw,44px) clamp(14px,2.2vw,32px) clamp(22px,2.6vw,38px)}
+@media (min-width:601px){.st-i:last-child{grid-column:span var(--sp,1)}}
+/* --len = the longest number's width in digits (set by JS): long numbers shrink to fit one column (measured on the list,
+   so a wider last cell keeps the same size as the others) */
+.st-n{display:flex;align-items:flex-start;justify-content:flex-end;direction:ltr;font-family:var(--font-display);font-weight:800;font-size:min(clamp(46px,6vw,92px),calc((100cqw / var(--n,3) - 2 * clamp(14px,2.2vw,32px)) / (var(--len,3) * .7)));line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.st-v{display:inline-block;text-align:right;padding-bottom:.06em;background:linear-gradient(115deg,var(--accent),color-mix(in oklab,var(--accent) 40%,var(--teal)) 62%,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.st-plus{font-size:.5em;line-height:1;margin:.12em .08em 0 0;color:var(--teal)}
+.st-l{display:block;margin-top:14px}
+.st-l b{display:block;font-size:clamp(16px,1.3vw,19px);font-weight:600;line-height:1.45}
+.st-l small{display:block;margin-top:3px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);direction:ltr;text-align:right}
+.st-bar{position:absolute;inset-inline:0;bottom:-1px;height:2px;background:linear-gradient(to left,var(--teal),var(--accent));transform:scaleX(var(--p,1));transform-origin:right center}
+@media (forced-colors:active){.st-v{forced-color-adjust:none;background:none;color:CanvasText}}
 
 /* Process (dark band) */
 .band{position:relative;margin-inline:clamp(8px,1.4vw,20px);border-radius:clamp(28px,4vw,56px);background:var(--band);color:#F6F3EF;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px var(--band-line)}
@@ -779,6 +860,9 @@ html:has(.pv[open]){overflow:hidden}
   .xs-i h4,.xs-i p{grid-column:2}
   .wa-fab{width:54px;height:54px}
 }
+@media (max-width:720px){.cl-grid{grid-template-columns:repeat(3,minmax(0,1fr));border-radius:var(--radius)}}
+@media (max-width:600px){.st-list{grid-template-columns:minmax(0,1fr)}.st-i{display:flex;align-items:center;gap:clamp(12px,4vw,20px);padding:16px 2px 14px}.st-n{flex:0 0 46%;font-size:min(clamp(40px,12vw,54px),calc(46cqw / (var(--len,3) * .7)))}.st-l{margin-top:0;min-width:0}}
+@media (max-width:480px){.cl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cl-b{aspect-ratio:1/.84}}
 @media (hover:none){.svc:hover,.tool:hover,.dt-i:hover{transform:none}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -830,6 +914,7 @@ html:has(.pv[open]){overflow:hidden}
     <nav class="nav" aria-label="القائمة الرئيسية">
       <a href="#services">الخدمات</a>
       <a href="#work">الأعمال</a>
+      <a href="#clients">عملائي</a>
       <a href="#process">طريقة الشغل</a>
       <a href="#about">من أنا</a>
       <a href="#contact">تواصل</a>
@@ -849,9 +934,10 @@ html:has(.pv[open]){overflow:hidden}
   <ol>
     <li><a href="#services" style="--i:0">الخدمات</a></li>
     <li><a href="#work" style="--i:1">الأعمال</a></li>
-    <li><a href="#process" style="--i:2">طريقة الشغل</a></li>
-    <li><a href="#about" style="--i:3">من أنا</a></li>
-    <li><a href="#contact" style="--i:4">تواصل</a></li>
+    <li><a href="#clients" style="--i:2">عملائي</a></li>
+    <li><a href="#process" style="--i:3">طريقة الشغل</a></li>
+    <li><a href="#about" style="--i:4">من أنا</a></li>
+    <li><a href="#contact" style="--i:5">تواصل</a></li>
   </ol>
   <div class="mnav-foot">
     <div class="socials"><a class="soc ig" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span class="sr-only">إنستغرام</span></a><a class="soc wa" data-ch="whatsapp" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span class="sr-only">واتساب</span></a><a class="soc fb" data-ch="facebook" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span class="sr-only">فيسبوك</span></a><a class="soc be" data-ch="behance" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-be"/></svg><span class="sr-only">بيهانس</span></a><a class="soc ml" data-ch="email" hidden href="#"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span class="sr-only">إيميل</span></a></div>
@@ -1105,6 +1191,29 @@ html:has(.pv[open]){overflow:hidden}
   </div>
 </section>
 
+<!-- ================= Clients + numbers («عملائي» · «إنجازاتي») ================= -->
+<!-- اللوغوهات بيعملها make_clients.py (works/clients.js + clients.json)، والأرقام من STATS تحت. الفاضي ما بيظهر -->
+<section class="section" id="clients" aria-labelledby="cl-title" hidden>
+  <div class="container">
+    <div class="sec-head" id="clHead">
+      <div data-reveal>
+        <p class="kicker"><span class="kn en">03</span><span class="kl"></span><span class="en" lang="en">Clients</span></p>
+        <h2 class="h2" id="cl-title">عملاء <span class="nw"><span class="hl">وثقوا بشغلي</span><i class="tdot" aria-hidden="true"></i></span></h2>
+      </div>
+      <p class="lead" data-reveal style="--d:1">مؤسسات، مدارس، دور نشر، وصنّاع محتوى. <span class="cl-hint">اكبس على أي شعار لتشوف الهوية اللي صمّمتها إلو.</span></p>
+    </div>
+    <ul class="cl-grid" id="clGrid" role="list" data-reveal></ul>
+
+    <div class="st" id="achievements" hidden>
+      <div class="st-head" data-reveal>
+        <span class="pj-k"><span lang="en">Achievements</span></span>
+        <h3 class="st-t" id="st-title">إنجازاتي <span class="hl">بالأرقام</span></h3>
+      </div>
+      <ul class="st-list" id="stList" role="list"></ul>
+    </div>
+  </div>
+</section>
+
 <!-- ================= Process ================= -->
 <section class="section band" id="process" aria-labelledby="proc-title">
   <svg class="band-wm" viewBox="0 0 888.9 970.7" aria-hidden="true"><use href="#s-mark"/></svg>
@@ -1112,7 +1221,7 @@ html:has(.pv[open]){overflow:hidden}
   <div class="container">
     <div class="sec-head">
       <div data-reveal>
-        <p class="kicker"><span class="kn en">03</span><span class="kl"></span><span class="en" lang="en">Process</span></p>
+        <p class="kicker"><span class="kn en">04</span><span class="kl"></span><span class="en" lang="en">Process</span></p>
         <h2 class="h2" id="proc-title">من الفكرة للتسليم، <span class="hl">بخطوات <span class="nw">واضحة<i class="tdot" aria-hidden="true"></i></span></span></h2>
       </div>
       <p class="lead" data-reveal style="--d:1">طريقة شغل مريحة إلك، بتعرف فيها وين وصلنا بكل مرحلة.</p>
@@ -1134,7 +1243,7 @@ html:has(.pv[open]){overflow:hidden}
   <div class="container about-grid">
     <div class="about-copy">
       <div data-reveal>
-        <p class="kicker"><span class="kn en">04</span><span class="kl"></span><span class="en" lang="en">About</span></p>
+        <p class="kicker"><span class="kn en">05</span><span class="kl"></span><span class="en" lang="en">About</span></p>
         <h2 class="h2" id="about-title">أهلاً، أنا <span class="nw"><span class="hl">خالد</span><i class="tdot" aria-hidden="true"></i></span></h2>
       </div>
       <p class="about-p" data-reveal style="--d:1">أعمل في <strong>التصميم الغرافيكي ومونتاج الفيديو</strong>، وأهتم بتحويل الأفكار إلى تصاميم بصرية واضحة ومميزة. بالنسبة إليّ، كل مشروع هو فرصة لنحكي قصة بطريقة جديدة.</p>
@@ -1168,7 +1277,7 @@ html:has(.pv[open]){overflow:hidden}
     <div class="cta" data-reveal>
       <svg class="cta-wm" viewBox="0 0 888.9 970.7" aria-hidden="true"><use href="#s-mark"/></svg>
       <div class="cta-copy">
-        <p class="kicker"><span class="kn en">05</span><span class="kl"></span><span class="en" lang="en">Let’s create</span></p>
+        <p class="kicker"><span class="kn en">06</span><span class="kl"></span><span class="en" lang="en">Let’s create</span></p>
         <h2 class="h2" id="cta-title">عندك فكرة؟ <span class="hl">خلّينا نحوّلها لشي <span class="nw">مميز<i class="tdot" aria-hidden="true"></i></span></span></h2>
         <p class="cta-p">تصميم جديد، هوية لمشروعك، أو فيديو بدك يلفت الانتباه؟ اختار شو بتحتاج واكتب فكرتك، ورح تجهز رسالتك لحالها — بس انسخها وابعتها عالإنستغرام.</p>
         <div class="cta-direct">
@@ -1226,7 +1335,7 @@ html:has(.pv[open]){overflow:hidden}
       <p>من فكرة بسيطة إلى تصميم يترك <span class="nw">أثرًا<i class="tdot" aria-hidden="true"></i></span></p>
       <div class="ftr-nav">
         <nav class="ftr-links" aria-label="روابط التذييل">
-          <a href="#services">الخدمات</a><a href="#work">الأعمال</a><a href="#process">طريقة الشغل</a><a href="#about">من أنا</a><a href="#contact">تواصل</a>
+          <a href="#services">الخدمات</a><a href="#work">الأعمال</a><a href="#clients">عملائي</a><a href="#process">طريقة الشغل</a><a href="#about">من أنا</a><a href="#contact">تواصل</a>
         </nav>
         <div class="socials"><a class="soc ig" href="https://www.instagram.com/haliddesigner.tr/" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg><span class="sr-only">إنستغرام</span></a><a class="soc wa" data-ch="whatsapp" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span class="sr-only">واتساب</span></a><a class="soc fb" data-ch="facebook" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span class="sr-only">فيسبوك</span></a><a class="soc be" data-ch="behance" hidden href="#" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-be"/></svg><span class="sr-only">بيهانس</span></a><a class="soc ml" data-ch="email" hidden href="#"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span class="sr-only">إيميل</span></a></div>
       </div>
@@ -1268,6 +1377,18 @@ html:has(.pv[open]){overflow:hidden}
 
 <!-- المشاريع: بيعملها process_works.py (works/data.js). إذا الملف مش موجود بيضل بس رابط الإنستغرام -->
 <script src="works/data.js"></script>
+<script src="works/clients.js"></script>
+<script>
+/* =====================================================================
+   ✏️  إنجازاتي بالأرقام — حط أرقام خالد الحقيقية، والقائمة الفاضية ما بتظهر
+   ---------------------------------------------------------------------
+   كل رقم سطر:  { n: 150, t: 'عميل', en: 'Clients' },   (en اختياري)
+   الرقم بيطلع «+150»؛ إذا الرقم دقيق وما بدك + حط  plus: false
+   أحسن شي 2 لـ 4 أرقام (أكتر من 4 بينزلوا عسطر تاني)
+   ===================================================================== */
+window.HALID_STATS = [
+];
+</script>
 <script>
 /* المشاريع ما بتنعدّل هون: بتجي من works/data.js (process_works.py + curation.json) */
 /* ---------- project viewer (shared by the home page and works/) ---------- */
@@ -1445,7 +1566,7 @@ const CONTACT = {
   const secIO = new IntersectionObserver((ents) => ents.forEach(en => {
     if (en.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
   }), { rootMargin: '-45% 0px -50% 0px' });
-  ['top', 'services', 'work', 'process', 'about', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) secIO.observe(s); });
+  ['top', 'services', 'work', 'clients', 'process', 'about', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) secIO.observe(s); });
 
   /* ---------- mobile menu ---------- */
   const burger = $('#burger'), mnav = $('#mnav');
@@ -1865,6 +1986,116 @@ const CONTACT = {
     new MutationObserver(() => { if (still()) vids.forEach(vd => vd.pause()); }).observe(root, { attributes: true, attributeFilter: ['class'] });
     mo.addEventListener('click', (e) => { const b = e.target.closest('.ph'); if (b) { vids.forEach(vd => vd.pause()); HV.open(+b.dataset.p, 0, b); } });
   }
+
+  /* ---------- «عملائي» (logo wall) + «إنجازاتي» (numbers) ---------- */
+  const clSec = $('#clients'), clGrid = $('#clGrid');
+  const CL = (window.HALID_CLIENTS && Array.isArray(window.HALID_CLIENTS.clients) ? window.HALID_CLIENTS.clients : []).filter(c => c && c.img && c.name);
+  /* «١٥٠» «1,500» «+150» all read as numbers; anything else is dropped with a console note */
+  const num = (v) => +String(v ?? '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٫]/g, '.').replace(/[,،٬\s+]/g, '');
+  const ST = (Array.isArray(window.HALID_STATS) ? window.HALID_STATS : []).filter(s => {
+    const ok = s && Number.isFinite(num(s.n)) && num(s.n) > 0 && String(s.t || '').trim();
+    if (!ok) console.warn('HALID_STATS: skipped', s);
+    return ok;
+  });
+  if (clSec && clGrid) {
+    const col = (c) => /^#[0-9a-f]{6}$/i.test(c || '') ? c : '';
+    if (CL.length) {
+      const arrow = '<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>';
+      let linked = 0;
+      clGrid.innerHTML = CL.map((c, i) => {
+        const pi = c.project ? HV.find(c.project) : -1;
+        if (c.project && pi < 0) console.warn('HALID_CLIENTS: no project "' + c.project + '" for', c.name);
+        const bc = col(c.c) || '#502462', k = Math.max(.4, Math.min(2.6, +c.k || 1));
+        const inner = `<span class="cl-fill" aria-hidden="true"></span>`
+          + `<span class="cl-in" aria-hidden="true"><span class="cl-logo" style="--m:url('${esc(IMG + encodeURIComponent(c.img))}')"></span></span>`
+          + `<span class="cl-cap" aria-hidden="true"><span class="cl-ct"><b>${esc(c.name)}</b>${c.kind ? `<small>${esc(c.kind)}</small>` : ''}</span>${pi >= 0 ? `<span class="cl-go">${arrow}</span>` : ''}</span>`;
+        const style = `--bc:${bc};--bcd:${col(c.cd) || bc};--k:${k};--i:${i}`;
+        if (pi >= 0) linked++;
+        return `<li class="cl" style="${style}">` + (pi >= 0
+          ? `<button class="cl-b" type="button" data-p="${pi}" aria-label="${esc(c.name + ' — شوف الهوية')}">${inner}</button>`
+          : `<div class="cl-b" role="img" aria-label="${esc(c.name)}">${inner}</div>`) + '</li>';
+      }).join('') + `<li class="cl cl-cta" hidden><a class="cl-b" href="#contact"><b>شعارك الجاي هون؟</b><small>خلّينا نشتغل سوا ${arrow}</small></a></li>`;
+      /* "tap any logo" only when every logo really opens something */
+      if (linked < CL.length) $('.cl-hint', clSec)?.remove();
+      /* the gap after the last logo (when the row isn't full) becomes an invitation */
+      const cta = $('.cl-cta', clGrid);
+      const fit = () => {
+        const cols = getComputedStyle(clGrid).gridTemplateColumns.split(' ').length, r = CL.length % cols;
+        cta.hidden = !r; cta.style.gridColumn = r ? `span ${cols - r}` : '';
+      };
+      let fitT = 0; addEventListener('resize', () => { cancelAnimationFrame(fitT); fitT = requestAnimationFrame(fit); });
+      $('a', cta).addEventListener('click', (e) => { e.preventDefault(); goContact(); });
+      clGrid.addEventListener('click', (e) => { const b = e.target.closest('.cl-b[data-p]'); if (b) HV.open(+b.dataset.p, 0, b); });
+      if (fine) {
+        /* the hairlines light up around the pointer; each tile fills from where the pointer came in and drains to where it left */
+        clGrid.addEventListener('pointermove', (e) => {
+          const r = clGrid.getBoundingClientRect();
+          clGrid.style.setProperty('--gx', (e.clientX - r.left).toFixed(0) + 'px'); clGrid.style.setProperty('--gy', (e.clientY - r.top).toFixed(0) + 'px');
+        });
+        clGrid.addEventListener('pointerenter', () => clGrid.classList.add('glow'));
+        clGrid.addEventListener('pointerleave', () => clGrid.classList.remove('glow'));
+        const edge = (e) => {
+          const b = e.target.closest?.('.cl-b'); if (!b || b.contains(e.relatedTarget)) return;
+          const r = b.getBoundingClientRect();
+          b.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+          b.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        };
+        clGrid.addEventListener('pointerover', edge); clGrid.addEventListener('pointerout', edge);
+      }
+      clSec.hidden = false; fit();
+    } else {
+      /* numbers only: the section and its links take the numbers' name */
+      clGrid.hidden = true; $('#clHead').hidden = true;
+      clSec.setAttribute('aria-labelledby', 'st-title');
+      $$('a[href="#clients"]').forEach(a => { a.textContent = 'إنجازاتي'; });
+    }
+    if (ST.length) {
+      const list = $('#stList'), counting = !still();
+      const cols = Math.min(ST.length, 4), rest = ST.length % cols;
+      const rows = ST.map(s => {
+        const raw = num(s.n), dec = Math.min(2, (String(raw).split('.')[1] || '').length);
+        return { n: dec ? raw : Math.round(raw), dec, plus: s.plus !== false, t: s.t, en: s.en };
+      });
+      const fmt = (o, v) => v.toFixed(o.dec);
+      list.style.setProperty('--n', cols);
+      /* the longest number sets one shared size, so all the numbers stay the same height */
+      list.style.setProperty('--len', Math.max(...rows.map(o => fmt(o, o.n).length + (o.plus ? .6 : 0))).toFixed(1));
+      list.innerHTML = rows.map((o, i) => {
+        const last = i === rows.length - 1 && rest ? `;--sp:${cols - rest + 1}` : '';
+        return `<li class="st-i" style="--i:${i}${counting ? ';--p:0' : ''}${last}">`
+          + `<span class="st-n" aria-hidden="true">${o.plus ? '<span class="st-plus">+</span>' : ''}<span class="st-v" style="min-width:${fmt(o, o.n).length}ch">${counting ? fmt(o, 0) : fmt(o, o.n)}</span></span>`
+          + `<span class="st-l" aria-hidden="true"><b>${esc(o.t)}</b>${o.en ? `<small lang="en">${esc(o.en)}</small>` : ''}</span>`
+          + `<span class="sr-only">${o.plus ? 'أكتر من ' : ''}${fmt(o, o.n)} ${esc(o.t)}</span><i class="st-bar" aria-hidden="true"></i></li>`;
+      }).join('');
+      $('#achievements').hidden = false; clSec.hidden = false;
+      if (counting) {
+        const items = $$('.st-i', list).map((li, i) => ({ li, v: $('.st-v', li), o: rows[i] }));
+        const done = () => items.forEach(it => { it.v.textContent = fmt(it.o, it.o.n); it.li.style.setProperty('--p', 1); });
+        const run = () => {
+          if (still()) { done(); return; }
+          const t0 = performance.now(), D = 1800;
+          const tick = (t) => {
+            let busy = false;
+            items.forEach((it, i) => {
+              const k = Math.min(1, Math.max(0, (t - t0 - i * 150) / D)), e = 1 - Math.pow(1 - k, 4);
+              it.v.textContent = k < 1 ? fmt(it.o, it.o.dec ? it.o.n * e : Math.round(it.o.n * e)) : fmt(it.o, it.o.n);
+              it.li.style.setProperty('--p', e.toFixed(3));
+              if (k < 1) busy = true;
+            });
+            if (busy) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const sio = new IntersectionObserver(([en]) => { if (en.isIntersecting) { sio.disconnect(); run(); } }, { threshold: .35 });
+        sio.observe(list);
+      }
+    }
+    $$('[data-reveal]', clSec).forEach(el => revIO.observe(el));
+  }
+  if (!clSec || clSec.hidden) $$('a[href="#clients"]').forEach(a => { (a.closest('li') || a).hidden = true; });
+  /* section numbers (01, 02 …) follow the sections that are actually on the page */
+  let secN = 0;
+  $$('main > section').forEach(sec => { const kn = !sec.hidden && $('.kicker .kn', sec); if (kn && !kn.closest('[hidden]')) kn.textContent = String(++secN).padStart(2, '0'); });
 
   /* ---------- process steps progress ---------- */
   const stepsEl = $('#steps'), stepItems = $$('.step');
